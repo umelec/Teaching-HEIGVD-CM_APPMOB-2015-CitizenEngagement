@@ -1,4 +1,4 @@
-angular.module('citizen-engagement.auth', [])
+angular.module('citizen-engagement.auth', ['angular-storage'])
 
   .service('AuthService', function() {
 
