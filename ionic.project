@@ -1,4 +1,11 @@
 {
   "name": "citizen-engagement",
-  "app_id": ""
+  "app_id": "",
+   "proxies": [
+    {
+      "path": "/api-proxy",
+      "proxyUrl": "https://desolate-refuge-6425.herokuapp.com/api"
+    }
+  ]
 }
+
