@@ -45,7 +45,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
     // This is the abstract state for the tabs directive.
     .state('tab', {
       url: '/tab',
@@ -79,6 +78,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 
     .state('tab.issueList', {
       url: '/issueList',
+      controller: 'IssueListCrtl',
       views: {
         'tab-issueList': {
           templateUrl: 'templates/issueList.html'
@@ -87,23 +87,83 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
     })
 
 
+      .state('newUser', {
+      url: '/newuser',
+       views: {
+        'tab-newUser': {
+          templateUrl: 'templates/newuser.html'
+        }
+      }
+        })
 
 
    .state('login', {
       url: '/login',
       controller: 'LoginCtrl',
       templateUrl: 'templates/login.html'
-    })
-
-
-
-  ;
+    });
 
   // Define the default state (i.e. the first screen displayed when the app opens).
   $urlRouterProvider.otherwise(function($injector) {
     $injector.get('$state').go('tab.newIssue'); // Go to the new issue tab by default.
   });
+})
+
+
+
+.controller('IssueListCrtl', function($http, $scope, apiUrl){
+
+$http.get(apiUrl + '/issues').then(function(resp) {
+    console.log('Success', resp);
+
+    $scope.issues = resp.data.issues;
+
+
+
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  })
+
+
+})
+
+
+
+
+/*
+.controller('IssueListCrtl',function($scope){
+
+   $scope.issueListItems = [{
+    task: 'Scuba Diving',
+    status: 'not done'
+  }, {
+    task: 'Climb Everest',
+    status: 'not done'
+  }]
 });
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
