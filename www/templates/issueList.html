@@ -5,11 +5,35 @@
   <ion-content>
     <p>Hello! This is the issue creation screen.</p>
 
-	<ion-list ng-controller="IssueListCrtl">
-  <ion-item ng-repeat="issue in issues">
-    {{issue.description}}
-  </ion-item>
+
+ 
+   
+  
+
+
+  <ion-list ng-controller="IssueListCrtl">
+<div class="list">
+
+   <ion-item ng-repeat="issue in issues">
+
+    <a class="item item-avatar" href="#">
+      <img src="venkman.jpg">
+      <h2> {{issue.description}}</h2>
+      <p> {{issue.description}}</p>
+    </a>
+
+    </ion-item>
+
+
+
+</div>
+
 </ion-list>
+
+
+
+
+
 
 	
 	<div class="bar bar-header bar-calm">

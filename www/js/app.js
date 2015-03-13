@@ -114,9 +114,9 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 .controller('IssueListCrtl', function($http, $scope, apiUrl){
 
 $http.get(apiUrl + '/issues').then(function(resp) {
-    console.log('Success', resp);
+    console.log('Success', resp.data);
 
-    $scope.issues = resp.data.issues;
+    $scope.issues = resp.data;
 
 
 
