@@ -1,4 +1,5 @@
-angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants'])
+
+  angular.module('citizen-engagement.auth', ['angular-storage'])
 
   .service('AuthService', function(store) {
 
