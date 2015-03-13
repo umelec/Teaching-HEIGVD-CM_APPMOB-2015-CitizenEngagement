@@ -86,6 +86,16 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       }
     })
 
+     .state('tab.issue', {
+    url: "/issueList/:issueId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/issue.html",
+        controller: 'issueCtrl'
+      }
+    }
+  })
+
 
       .state('newUser', {
       url: '/newuser',

@@ -1,16 +1,22 @@
-<ion-view view-title="Issue List">
+<ion-view view-title="Issue">
  <ion-nav-buttons side="secondary">
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button ion-log-out"></button>
   </ion-nav-buttons>
   <ion-content>
     <p>Hello! This is the issue creation screen.</p>
 
+
+ 
+   
+  
+
+
   <ion-list ng-controller="IssueListCrtl">
 <div class="list">
 
    <ion-item ng-repeat="issue in issues">
 
-    <a class="item item-avatar" href="#/issueList">
+    <a class="item item-avatar" href="#/issues">
       <img src="venkman.jpg">
       <h2> {{issue.description}}</h2>
       <p> {{issue.description}}</p>
