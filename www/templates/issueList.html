@@ -8,14 +8,15 @@
   <ion-list ng-controller="IssueListCrtl">
 <div class="list">
 
-   <ion-item ng-repeat="issue in issues">
-
-    <a class="item item-avatar" href="#/issueList">
+   <ion-item ng-repeat="issue in issues" ui-sref="issue">
+   <!-- <a class="item item-avatar" ng-click="openModal()" href="#/tab/issueList/{issue.id}">-->
       <img src="venkman.jpg">
       <h2> {{issue.description}}</h2>
       <p> {{issue.description}}</p>
-    </a>
-  
+    <!--</a>-->
+
+
+
   </ion-item>
 </div>
 </ion-list>
