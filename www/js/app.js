@@ -38,6 +38,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
   });
 })
 
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states

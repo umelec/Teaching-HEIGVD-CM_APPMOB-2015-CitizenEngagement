@@ -25,6 +25,8 @@
           <input type="text" placeholder="Last Name" ng-model="user.lastname" required="required"/>
         </label>
       </div>
+        
+
 
       <!-- Display an error message here, above the submit button, if an error occurred. -->
       <p ng-if="error" class="error">{{ error }}</p>
@@ -36,5 +38,15 @@
       -->
       <button class="button button-full button-positive" ng-click="register()" ng-disabled="loginForm.$invalid">Register</button>
     </form>
+
+
+
+  
+    <div class="row">
+      <div class="col col-33 col-offset-67">
+    <a ui-ref="creatAccount">Créer un compte ? </a>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>
