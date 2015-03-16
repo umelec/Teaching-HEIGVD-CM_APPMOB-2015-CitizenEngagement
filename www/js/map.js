@@ -1,6 +1,10 @@
- angular.module('citizen-engagement.map', ['leaflet-directive', 'citizen-engagement.constants', 'citizen-engagement.issue'])
+ angular.module('citizen-engagement.map', ['leaflet-directive', 'citizen-engagement.constants', 'citizen-engagement.issue', 'citizen-engagement.geoLocation'])
 
- .controller("MapController", function($scope, mapboxMapId, mapboxAccessToken, IssueService) {
+ .controller("MapController", function($scope, mapboxMapId, mapboxAccessToken, IssueService,$log, $scope, geolocation) {
+
+
+
+
 
 
  	var mapboxTileLayer = "http://api.tiles.mapbox.com/v4/" + mapboxMapId;
@@ -8,23 +12,36 @@
  	$scope.mapDefaults = {
  		tileLayer: mapboxTileLayer
  	};
- 	$scope.mapCenter = {
- 		lat: 51.48,
- 		lng: 0,
+
+
+
+ 	geolocation.getLocation().then(function(data) {
+		$scope.mapCenter.lat = data.coords.latitude;
+		$scope.mapCenter.lng = data.coords.longitude;
+
+	}, function(error) {
+		$log.error("Could not get location: " + error);
+	});
+
+
+
+
+	$scope.mapCenter = {
+ 		lat: 46.76,
+ 		lng: 63.62,
  		zoom: 14
  	};
- 	$scope.mapMarkers = [];
 
- 	
+
+
+
+
+ 	$scope.mapMarkers = []; 	
 
  	IssueService.getIssues().then(function(data){
- 		//console.log(data.data);
- 		
-
-		
 
 	 	angular.forEach(data.data, function (issue) {
-	 		console.log(issue)
+	 		//console.log(issue)
 	 		$scope.mapMarkers.push({
 		 		lat: issue.lat,
 		 		lng: issue.lng,

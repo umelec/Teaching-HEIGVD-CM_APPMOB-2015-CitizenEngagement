@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.camera', 'citizen-engagement.map', 'citizen-engagement.issue'])
+angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.camera', 'citizen-engagement.map', 'citizen-engagement.issue', 'geolocation'])
 
 
 .run(function(AuthService, $rootScope, $state) {
