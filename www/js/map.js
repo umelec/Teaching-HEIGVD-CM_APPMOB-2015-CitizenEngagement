@@ -15,20 +15,33 @@
  	};
  	$scope.mapMarkers = [];
 
- 	var issue = IssueService.getIssue();
+ 	
 
- 	console.log("MapData", issue);
+ 	IssueService.getIssues().then(function(data){
+ 		//console.log(data.data);
+ 		
 
- 	$scope.mapMarkers.push({
- 		lat: issue.lat,
- 		lng: issue.lng,
- 		message: "<p>{{ issue.description }}</p><img src=\"{{ issue.imageUrl }}\" width=\"200px\" />",
- 		getMessageScope: function() {
- 			var scope = $scope.$new();
- 			scope.issue = issue;
- 			return scope;
- 		}
- 	})
+		
+
+	 	angular.forEach(data.data, function (issue) {
+	 		console.log(issue)
+	 		$scope.mapMarkers.push({
+		 		lat: issue.lat,
+		 		lng: issue.lng,
+		 		message: "<p>{{ issue.description }}</p><img src=\"{{ issue.imageUrl }}\" width=\"200px\" />",
+		 		getMessageScope: function() {
+		 			var scope = $scope.$new();
+		 			scope.issue = issue;
+		 			return scope;
+		 		}
+		 	})
+	 	});
+
+ 	});
+
+
+ 	
+ 	
  
 
  })

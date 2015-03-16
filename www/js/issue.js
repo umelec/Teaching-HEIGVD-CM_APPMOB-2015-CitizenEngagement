@@ -2,9 +2,12 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 
 .controller('IssueListCrtl', function(IssueService, $scope){
 
-	IssueService.getIssue().then(function(data) {
-		console.log("Issues" , data.data[1].lat);
+	IssueService.getIssues().then(function(data) {
+		
+
 		$scope.issues = data.data;
+
+
 	});
 
 
@@ -13,12 +16,23 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 
 
 .factory("IssueService", function($http, apiUrl) {
+	var issues = [];
 	return {
-		getIssue: function() {
-			return $http.get(apiUrl + '/issues').then(function(response){
-				issues = response;
+		getIssues: function() {
+			return $http.get(apiUrl + '/issues')
+
+			/*.then(function(response){
+				issues = response.data;
 				return issues;
-			});
+			});*/
+		},
+		getIssue: function(id){
+			for(i=0;i<issues.length;i++){
+				if(users[i].id == id){
+					return issues[i];
+				}
+			}
+			return null;
 		}
 	}
 })
