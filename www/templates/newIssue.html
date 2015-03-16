@@ -2,7 +2,15 @@
   <ion-nav-buttons side="secondary">
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
   </ion-nav-buttons>
-  <ion-content>
-    <p>Hello! This is the issue creation screen.</p>
+  <ion-content padding="true">
+
+
+
+      <button ng-click="getPhoto()" class="button button-block button-primary">Take Photo</button>
+      <img ng-src="{{lastPhoto}}" style="max-width: 100%">
+
+
+
+
   </ion-content>
 </ion-view>

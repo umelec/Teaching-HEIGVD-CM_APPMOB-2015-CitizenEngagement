@@ -88,13 +88,11 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 
 
 
-      .state('newUser', {
-      url: '/newuser',
-       views: {
-        'tab-newUser': {
-          templateUrl: 'templates/newuser.html'
-        }
-      }
+      .state('register', {
+        url: '/register',
+        controller:'LoginCtrl',    
+        templateUrl: 'templates/newUser.html'
+  
         })
 
 
@@ -146,6 +144,35 @@ $http.get(apiUrl + '/issues').then(function(resp) {
 */
 
 
+.factory('Camera', ['$q', function($q) {
+
+  return {
+    getPicture: function(options) {
+      var q = $q.defer();
+
+      navigator.camera.getPicture(function(result) {
+        // Do any magic you need
+        q.resolve(result);
+      }, function(err) {
+        q.reject(err);
+      }, options);
+
+      return q.promise;
+    }
+  }
+}])
+
+  .controller('photoCtrl', function($scope, Camera) {
+
+    $scope.getPhoto = function() {
+      Camera.getPicture().then(function(imageURI) {
+        console.log(imageURI);
+      }, function(err) {
+        console.err(err);
+      })
+  }})
+
+    
 
 
 
