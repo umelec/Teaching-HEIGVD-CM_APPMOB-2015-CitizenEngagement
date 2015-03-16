@@ -93,6 +93,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
           templateUrl: 'templates/newuser.html'
         }
       }
+    })
 
       .state('register', {
         url: '/register',
@@ -104,13 +105,13 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       url: '/login',
       controller: 'LoginCtrl',
       templateUrl: 'templates/login.html'
-    })
-  });
+    });
+    
   // Define the default state (i.e. the first screen displayed when the app opens).
   $urlRouterProvider.otherwise(function($injector) {
-    $injector.get('$state').go('tab.newIssue'); // Go to the new issue tab by default.
+    $injector.get('$state').go('tab.IssueMap'); // Go to the new issue tab by default.
   })
-
+})
 
 .controller('IssueListCrtl', function($http, $scope, apiUrl){
 
@@ -138,8 +139,6 @@ $http.get(apiUrl + '/issues').then(function(resp) {
   }).error(function(err){
     console.error('ERR', err);
   });
-
-
 
 $scope.createIssue=function(){
     $http({
