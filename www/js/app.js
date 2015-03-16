@@ -78,17 +78,17 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 
     .state('tab.issueList', {
       url: '/issueList',
-      controller: 'IssueListCrtl',
       views: {
         'tab-issueList': {
-          templateUrl: 'templates/issueList.html'
+          templateUrl: 'templates/issueList.html',
+          controller: 'IssueListCrtl'
         }
       }
     })
 
 
-    .state('tap.issueList', {
-      url: "/issues/:issueId",
+    .state('tap.issueList.issue', {
+      url: "/issueList/:issueId",
       views: {
         'tab-issueList' :{
           templateUrl: "templates/issue.html",
