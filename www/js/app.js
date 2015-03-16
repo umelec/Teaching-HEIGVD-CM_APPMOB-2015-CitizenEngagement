@@ -93,20 +93,26 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
           templateUrl: 'templates/newuser.html'
         }
       }
-        })
+
+
+      .state('register', {
+        url: '/register',
+        controller:'LoginCtrl',
+        templateUrl: 'templates/newUser.html'
+      })
 
 
    .state('login', {
       url: '/login',
       controller: 'LoginCtrl',
       templateUrl: 'templates/login.html'
-    });
-
+    })
+  });
   // Define the default state (i.e. the first screen displayed when the app opens).
   $urlRouterProvider.otherwise(function($injector) {
     $injector.get('$state').go('tab.newIssue'); // Go to the new issue tab by default.
-  });
-})
+  })
+
 
 
 
@@ -140,12 +146,52 @@ $http.get(apiUrl + '/issues').then(function(resp) {
 $scope.createIssue=function(){
     $http({
       method: 'POST',
-     url: apiUrl + '/issueTypes',
-     data: { issueTypes: 'issueTypes' },
+      url: apiUrl + '/issueTypes',
+      data: { issueTypes: 'issueTypes' },
     }).success(function(){
         data: $scope.issue
       }).error(function(err){
         console.error('ERR', err);
       });
     };
+})
+
+/*
+.controller('IssueListCrtl',function($scope){
+
+   $scope.issueListItems = [{
+    task: 'Scuba Diving',
+    status: 'not done'
+  }, {
+    task: 'Climb Everest',
+    status: 'not done'
+  }]
+});
+*/
+
+.factory('Camera', ['$q', function($q) {
+
+  return {
+    getPicture: function(options) {
+      var q = $q.defer();
+
+      navigator.camera.getPicture(function(result) {
+        // Do any magic you need
+        q.resolve(result);
+      }, function(err) {
+        q.reject(err);
+      }, options);
+
+      return q.promise;
+    }
+  }
+}])
+
+.controller('photoCtrl', function($scope, Camera) {
+  $scope.getPhoto = function() {
+    Camera.getPicture().then(function(imageURI) {
+      console.log(imageURI);
+    }, function(err) {
+      console.err(err);
+    })}
 })
