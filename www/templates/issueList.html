@@ -3,35 +3,15 @@
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button ion-log-out"></button>
   </ion-nav-buttons>
   <ion-content>
-    <p>Hello! This is the issue creation screen.</p>
-
   <ion-list ng-controller="IssueListCrtl">
-<div class="list">
-
-   <ion-item ng-repeat="issue in issues" ui-sref="issue">
-   <!-- <a class="item item-avatar" ng-click="openModal()" href="#/tab/issueList/{issue.id}">-->
-      <img src="venkman.jpg">
-      <h2> {{issue.description}}</h2>
-      <p> {{issue.description}}</p>
-    <!--</a>-->
-
-
-
-  </ion-item>
-</div>
-</ion-list>
-
-
-
-
-
-
-	
-	<div class="bar bar-header bar-calm">
-  <h1 class="title">bar-calm</h1>
-</div>
-
-
+    <div class="list" ng-repeat="issue in issues" ui-sref="issueItem">
+      <!-- <a class="item item-avatar" ng-click="openModal()" href="#/tab/issueList/{{issue.id}}">-->
+      <a class="item item-avatar" href="#/tab/issueList/{{issue.id}}">
+        <img src={{issue.imageUrl}}>
+        <h2>{{issue.description}}</h2>
+        Etat: {{issue.state}} - Mis à jour le: {{issue.updateOn}}
+      </a>
+    </div>
+  </ion-list>
   </ion-content>
-
 </ion-view>

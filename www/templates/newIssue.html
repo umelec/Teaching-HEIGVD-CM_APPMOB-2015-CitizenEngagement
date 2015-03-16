@@ -1,15 +1,30 @@
 <ion-view view-title="New Issue">
   <ion-nav-buttons side="secondary">
+    <button class="button" ng-click="canGoBack && goBack()">Back</button>
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
   </ion-nav-buttons>
-  <ion-content padding="true"  ng-controller="photoCtrl">
 
-
-      <button ng-click="getPhoto()" class="button button-block button-primary">Take Photo</button>
-      <img ng-src="{{lastPhoto}}" style="max-width: 100%">
-
-
-
-
-  </ion-content>
+  <ion-content>
+    <form ng-submit"createIssue" ng-controller="IssueTypeListCrtl" ng-submit="createIssue(issue)">
+      <p>Afin de créer un incident, veuillez remplir les champs suivants :</p>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class"input-label">
+            Séléctionner un type d'accident
+          </div>
+          <select ng-model="issue.issueTypeId">
+            <option ng-repeat="issueType in issueTypes" value="{{issueType.id}}">
+              {{issueType.name}}
+            </option>
+          </select>
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="description" placeholder="Description de l'incident">
+        </label>
+        Ajouter une photo
+        <button ng-click="getPhoto()" class="button button-block button-primary">Prendre une photo</button>
+        <img ng-src="{{lastPhoto}}" style="max-width: 100%">
+      </div>
+      <button type="submit" class="button button-block button-positive">Ajouter l'incident</button>
+    </form>
 </ion-view>

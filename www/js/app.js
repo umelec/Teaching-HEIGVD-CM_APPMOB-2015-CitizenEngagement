@@ -86,83 +86,69 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       }
     })
 
-
+      .state('newUser', {
+      url: '/newuser',
+       views: {
+        'tab-newUser': {
+          templateUrl: 'templates/newuser.html'
+        }
+      }
+    })
 
       .state('register', {
         url: '/register',
-        controller:'LoginCtrl',    
+        controller:'LoginCtrl',
         templateUrl: 'templates/newUser.html'
-  
-        })
-
+      })
 
    .state('login', {
       url: '/login',
       controller: 'LoginCtrl',
       templateUrl: 'templates/login.html'
     });
-
+    
   // Define the default state (i.e. the first screen displayed when the app opens).
   $urlRouterProvider.otherwise(function($injector) {
-    $injector.get('$state').go('tab.newIssue'); // Go to the new issue tab by default.
-  });
+    $injector.get('$state').go('tab.IssueMap'); // Go to the new issue tab by default.
+  })
 })
 
-
-/*
 .controller('IssueListCrtl', function($http, $scope, apiUrl){
 
 $http.get(apiUrl + '/issues').then(function(resp) {
     console.log('Success', resp.data);
-
     $scope.issues = resp.data;
-
-
-
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
   })
 
-
 })
-*/
 
+//Issuecraetion controller
+.controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
+  $scope.issue={};
+  var req = {
+   method: 'GET',
+   url: apiUrl + '/issueTypes'
+ };
 
+  $http(req).success(function(data){
+    $scope.issueTypes = data;
+    $scope.issue.issueTypeId= data[0].id;
+  }).error(function(err){
+    console.error('ERR', err);
+  });
 
-/*
-.controller('IssueListCrtl',function($scope){
-
-   $scope.issueListItems = [{
-    task: 'Scuba Diving',
-    status: 'not done'
-  }, {
-    task: 'Climb Everest',
-    status: 'not done'
-  }]
-});
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$scope.createIssue=function(){
+    $http({
+      method: 'POST',
+      url: apiUrl + '/issueTypes',
+      data: { issueTypes: 'issueTypes' },
+    }).success(function(){
+        data: $scope.issue
+      }).error(function(err){
+        console.error('ERR', err);
+      });
+    };
+})
