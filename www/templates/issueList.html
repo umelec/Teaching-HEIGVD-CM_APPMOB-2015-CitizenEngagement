@@ -2,16 +2,25 @@
  <ion-nav-buttons side="secondary">
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button ion-log-out"></button>
   </ion-nav-buttons>
-  <ion-content>
+  <ion-content class="has-header">
+
+
+
   <ion-list ng-controller="IssueListCrtl">
+<!--
     <div class="list" >
-      <!-- <a class="item item-avatar" ng-click="openModal()" href="#/tab/issueList/{{issue.id}}">-->
+      <a class="item item-avatar" ng-click="openModal()" href="#/tab/issueList/{{issue.id}}">
       <a class="item item-avatar" ng-repeat="issue in issues" ui-sref="tab.issueShow({id:issue.id})">
         <img src={{issue.imageUrl}}>
         <h2>{{issue.description}}</h2>
         <p>Etat: {{issue.state}} - Mis à jour le: {{issue.updateOn}}</p>
       </a>
-    </div>
+    </div>  >-->
+    <ion-item class="item-avatar-left" ng-repeat="issue in issues"  ui-sref="#/tab/issues/{{issue.id}}">
+        <img src="{{issue.imageUrl}}">
+        <h2>{{issue.description}}</h2>
+        Etat: {{issue.state}} - Mis à jour le: {{issue.updateOn}}
+    </ion-item>
   </ion-list>
   </ion-content>
 </ion-view>

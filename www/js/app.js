@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.camera', 'citizen-engagement.map', 'citizen-engagement.issue'])
+angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.camera', 'citizen-engagement.map', 'citizen-engagement.issue', 'geolocation'])
 
 
 .run(function(AuthService, $rootScope, $state) {
@@ -29,13 +29,13 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
+  if(window.cordova && window.cordova.plugins.Keyboard) {
+    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  }
+  if(window.StatusBar) {
+    StatusBar.styleDefault();
+  }
+});
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -90,30 +90,42 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 
     .state('tab.issueList', {
       url: '/issueList',
-      controller: 'IssueListCrtl',
       views: {
         'tab-issueList': {
-          templateUrl: 'templates/issueList.html'
+          templateUrl: 'templates/issueList.html',
+          controller: 'IssueListCrtl'
         }
       }
     })
 
-      .state('newUser', {
+
+    .state('tap.issueList.issue', {
+      url: "/issueList/:issueId",
+      views: {
+        'tab-issueList' :{
+          templateUrl: "templates/issue.html",
+          controller: "IssueCtrl"
+        }
+      }
+    })
+
+
+    .state('newUser', {
       url: '/newuser',
-       views: {
+      views: {
         'tab-newUser': {
           templateUrl: 'templates/newuser.html'
         }
       }
     })
 
-      .state('register', {
-        url: '/register',
-        controller:'LoginCtrl',
-        templateUrl: 'templates/newUser.html'
-      })
+    .state('register', {
+      url: '/register',
+      controller:'LoginCtrl',
+      templateUrl: 'templates/newUser.html'
+    })
 
-   .state('login', {
+    .state('login', {
       url: '/login',
       controller: 'LoginCtrl',
       templateUrl: 'templates/login.html'
@@ -121,13 +133,13 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 
   // Define the default state (i.e. the first screen displayed when the app opens).
   $urlRouterProvider.otherwise(function($injector) {
-    $injector.get('$state').go('tab.IssueMap'); // Go to the new issue tab by default.
+    $injector.get('$state').go('tab.issueList'); // Go to the new issue tab by default.
   })
 })
 
 .controller('IssueListCrtl', function($http, $scope, apiUrl){
 
-$http.get(apiUrl + '/issues').then(function(resp) {
+  $http.get(apiUrl + '/issues').then(function(resp) {
     console.log('Success', resp.data);
     $scope.issues = resp.data;
   }, function(err) {
@@ -145,24 +157,24 @@ $http.get(apiUrl + '/issues').then(function(resp) {
    url: apiUrl + '/issueTypes'
  };
 
-  $http(req).success(function(data){
-    $scope.issueTypes = data;
-    $scope.issue.issueTypeId= data[0].id;
+ $http(req).success(function(data){
+  $scope.issueTypes = data;
+  $scope.issue.issueTypeId= data[0].id;
+}).error(function(err){
+  console.error('ERR', err);
+});
+
+$scope.createIssue=function(){
+  $http({
+    method: 'POST',
+    url: apiUrl + '/issueTypes',
+    data: { issueTypes: 'issueTypes' },
+  }).success(function(){
+    data: $scope.issue
   }).error(function(err){
     console.error('ERR', err);
   });
-
-$scope.createIssue=function(){
-    $http({
-      method: 'POST',
-      url: apiUrl + '/issueTypes',
-      data: { issueTypes: 'issueTypes' },
-    }).success(function(){
-        data: $scope.issue
-      }).error(function(err){
-        console.error('ERR', err);
-      });
-    };
+};
 })
 
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
