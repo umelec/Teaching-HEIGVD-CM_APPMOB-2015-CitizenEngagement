@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants'])
+angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.camera', 'citizen-engagement.map', 'citizen-engagement.issue'])
 
 
 .run(function(AuthService, $rootScope, $state) {
@@ -71,7 +71,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       url: '/issueMap',
       views: {
         'tab-issueMap': {
-          templateUrl: 'templates/issueMap.html'
+          templateUrl: 'templates/issueMap.html', controller: 'MapController'
         }
       }
     })
@@ -109,7 +109,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 })
 
 
-
+/*
 .controller('IssueListCrtl', function($http, $scope, apiUrl){
 
 $http.get(apiUrl + '/issues').then(function(resp) {
@@ -126,7 +126,7 @@ $http.get(apiUrl + '/issues').then(function(resp) {
 
 
 })
-
+*/
 
 
 
@@ -144,35 +144,6 @@ $http.get(apiUrl + '/issues').then(function(resp) {
 */
 
 
-.factory('Camera', ['$q', function($q) {
-
-  return {
-    getPicture: function(options) {
-      var q = $q.defer();
-
-      navigator.camera.getPicture(function(result) {
-        // Do any magic you need
-        q.resolve(result);
-      }, function(err) {
-        q.reject(err);
-      }, options);
-
-      return q.promise;
-    }
-  }
-}])
-
-  .controller('photoCtrl', function($scope, Camera) {
-
-    $scope.getPhoto = function() {
-      Camera.getPicture().then(function(imageURI) {
-        console.log(imageURI);
-      }, function(err) {
-        console.err(err);
-      })
-  }})
-
-    
 
 
 
