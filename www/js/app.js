@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants'])
+angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.camera', 'citizen-engagement.map', 'citizen-engagement.issue'])
 
 
 .run(function(AuthService, $rootScope, $state) {
@@ -71,7 +71,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       url: '/issueMap',
       views: {
         'tab-issueMap': {
-          templateUrl: 'templates/issueMap.html'
+          templateUrl: 'templates/issueMap.html', controller: 'MapController'
         }
       }
     })
@@ -94,13 +94,11 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
         }
       }
 
-
       .state('register', {
         url: '/register',
         controller:'LoginCtrl',
         templateUrl: 'templates/newUser.html'
       })
-
 
    .state('login', {
       url: '/login',
@@ -112,8 +110,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
   $urlRouterProvider.otherwise(function($injector) {
     $injector.get('$state').go('tab.newIssue'); // Go to the new issue tab by default.
   })
-
-
 
 
 .controller('IssueListCrtl', function($http, $scope, apiUrl){
@@ -143,6 +139,8 @@ $http.get(apiUrl + '/issues').then(function(resp) {
     console.error('ERR', err);
   });
 
+
+
 $scope.createIssue=function(){
     $http({
       method: 'POST',
@@ -154,44 +152,4 @@ $scope.createIssue=function(){
         console.error('ERR', err);
       });
     };
-})
-
-/*
-.controller('IssueListCrtl',function($scope){
-
-   $scope.issueListItems = [{
-    task: 'Scuba Diving',
-    status: 'not done'
-  }, {
-    task: 'Climb Everest',
-    status: 'not done'
-  }]
-});
-*/
-
-.factory('Camera', ['$q', function($q) {
-
-  return {
-    getPicture: function(options) {
-      var q = $q.defer();
-
-      navigator.camera.getPicture(function(result) {
-        // Do any magic you need
-        q.resolve(result);
-      }, function(err) {
-        q.reject(err);
-      }, options);
-
-      return q.promise;
-    }
-  }
-}])
-
-.controller('photoCtrl', function($scope, Camera) {
-  $scope.getPhoto = function() {
-    Camera.getPicture().then(function(imageURI) {
-      console.log(imageURI);
-    }, function(err) {
-      console.err(err);
-    })}
 })
