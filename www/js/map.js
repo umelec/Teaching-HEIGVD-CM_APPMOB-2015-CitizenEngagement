@@ -2,7 +2,6 @@
 
  .controller("MapController", function($scope, mapboxMapId, mapboxAccessToken, IssueService) {
 
-
  	var mapboxTileLayer = "http://api.tiles.mapbox.com/v4/" + mapboxMapId;
  	mapboxTileLayer = mapboxTileLayer + "/{z}/{x}/{y}.png?access_token=" + mapboxAccessToken;
  	$scope.mapDefaults = {
@@ -15,13 +14,8 @@
  	};
  	$scope.mapMarkers = [];
 
-
-
  	IssueService.getIssues().then(function(data){
  		//console.log(data.data);
-
-
-
 
 	 	angular.forEach(data.data, function (issue) {
 	 		console.log(issue)
@@ -38,10 +32,5 @@
 	 	});
 
  	});
-
-
-
-
-
 
  })

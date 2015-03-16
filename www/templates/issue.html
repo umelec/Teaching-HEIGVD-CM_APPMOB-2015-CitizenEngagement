@@ -1,14 +1,15 @@
 <ion-view view-title="Issue">
-
- <ion-nav-buttons side="secondary">
-    <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button ion-log-out"></button>
+  <ion-nav-bar animation="nav-title-slide-ios7"
+           type="bar-positive"
+           back-button-type="button-icon"
+           back-button-icon="ion-arrow-left-c"></ion-nav-bar>
+  <ion-nav-buttons side="secondary">
+    <button class="button" ng-click="canGoBack && goBack()">Back</button>
+    <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
   </ion-nav-buttons>
- 
-   
-
         <ion-content>
-          <h1>This is the detail page</h1>
+          <h1>{{issues.description}}</h1>
+          {{issue.type}}
+          {{issue.}}
         </ion-content>
-
-
 </ion-view>

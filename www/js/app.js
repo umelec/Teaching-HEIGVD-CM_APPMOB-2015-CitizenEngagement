@@ -15,7 +15,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
   $rootScope.$on('$stateChangeStart', function(event, toState) {
 
     // If the user is not logged in and is trying to access another state than "login"...
-    if (!AuthService.currentUserId && toState.name != 'login') {
+    if (!AuthService.currentUserId && toState.name != 'login' && toState.name != 'newUser') {
 
       // ... then cancel the transition and go to the "login" state instead.
       event.preventDefault();
@@ -76,6 +76,18 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       }
     })
 
+    // à recrer depuis la map
+    .state('tab.issueShow', {
+      url: '/issueShow/:id',
+      views: {
+        'tab-issueList': {
+          controller: 'IssueShowCrtl',
+          templateUrl: 'templates/issue.html'
+        }
+      }
+    })
+
+
     .state('tab.issueList', {
       url: '/issueList',
       controller: 'IssueListCrtl',
@@ -106,7 +118,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       controller: 'LoginCtrl',
       templateUrl: 'templates/login.html'
     });
-    
+
   // Define the default state (i.e. the first screen displayed when the app opens).
   $urlRouterProvider.otherwise(function($injector) {
     $injector.get('$state').go('tab.IssueMap'); // Go to the new issue tab by default.
@@ -151,4 +163,36 @@ $scope.createIssue=function(){
         console.error('ERR', err);
       });
     };
+})
+
+.controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
+  var req = {
+   method: 'GET',
+   url: apiUrl + '/issues/'+$stateParams.id
+ };
+
+ // Warning to update
+ $http(req).success(function(data){
+   $scope.issues = data;
+   // $scope.issue.issueTypeId= data[0].id;
+ }).error(function(err){
+   console.error('ERR', err);
+ });
+
+ // warning to update !
+ $scope.addComment=function(){
+     $http({
+       method: 'POST',
+       url: apiUrl + '/issue/'+issue.id+'/actions',
+       headers: {
+         'Content-Type': application/json
+       },
+       data: { comments: 'comments' },
+     }).success(function(){
+         data: $scope.issue
+       }).error(function(err){
+         console.error('ERR', err);
+       });
+     };
+
 })
