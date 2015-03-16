@@ -15,13 +15,13 @@
  	};
  	$scope.mapMarkers = [];
 
- 	
+
 
  	IssueService.getIssues().then(function(data){
  		//console.log(data.data);
- 		
 
-		
+
+
 
 	 	angular.forEach(data.data, function (issue) {
 	 		console.log(issue)
@@ -40,8 +40,8 @@
  	});
 
 
- 	
- 	
- 
+
+
+
 
  })
