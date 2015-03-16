@@ -86,8 +86,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       }
     })
 
-
-
       .state('newUser', {
       url: '/newuser',
        views: {
@@ -116,55 +114,38 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 
 $http.get(apiUrl + '/issues').then(function(resp) {
     console.log('Success', resp.data);
-
     $scope.issues = resp.data;
-
-
-
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
   })
 
-
 })
 
+//Issuecraetion controller
+.controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
+  $scope.issue={};
+  var req = {
+   method: 'GET',
+   url: apiUrl + '/issueTypes'
+ };
 
+  $http(req).success(function(data){
+    $scope.issueTypes = data;
+    $scope.issue.issueTypeId= data[0].id;
+  }).error(function(err){
+    console.error('ERR', err);
+  });
 
-
-/*
-.controller('IssueListCrtl',function($scope){
-
-   $scope.issueListItems = [{
-    task: 'Scuba Diving',
-    status: 'not done'
-  }, {
-    task: 'Climb Everest',
-    status: 'not done'
-  }]
-});
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$scope.createIssue=function(){
+    $http({
+      method: 'POST',
+     url: apiUrl + '/issueTypes',
+     data: { issueTypes: 'issueTypes' },
+    }).success(function(){
+        data: $scope.issue
+      }).error(function(err){
+        console.error('ERR', err);
+      });
+    };
+})
