@@ -87,8 +87,8 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
     })
 
 
-    .state('tap.issueList.issue', {
-      url: "/issueList/:issueId",
+    .state('tap.issueList', {
+      url: "/:issueId",
       views: {
         'tab-issueList' :{
           templateUrl: "templates/issue.html",
@@ -125,17 +125,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
   })
 })
 
-.controller('IssueListCrtl', function($http, $scope, apiUrl){
 
-  $http.get(apiUrl + '/issues').then(function(resp) {
-    console.log('Success', resp.data);
-    $scope.issues = resp.data;
-  }, function(err) {
-    console.error('ERR', err);
-    // err.status will contain the status code
-  })
-
-})
 
 //Issuecraetion controller
 .controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
@@ -152,15 +142,4 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
   console.error('ERR', err);
 });
 
-$scope.createIssue=function(){
-  $http({
-    method: 'POST',
-    url: apiUrl + '/issueTypes',
-    data: { issueTypes: 'issueTypes' },
-  }).success(function(){
-    data: $scope.issue
-  }).error(function(err){
-    console.error('ERR', err);
-  });
-};
 })

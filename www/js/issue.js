@@ -32,11 +32,31 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 })
 
 
-.factory("IssueService", function($http, apiUrl) {
+
+.controller('IssueListCrtl', function($http, $scope, apiUrl){
+
+  $http.get(apiUrl + '/issues').then(function(resp) {
+    console.log('Success', resp.data);
+    $scope.issues = resp.data;
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  })
+
+})
+
+
+.factory("IssueService", function($http, $scope, apiUrl) {
 	var issues = [];
 	return {
 		getIssues: function() {
-			return $http.get(apiUrl + '/issues')
+			return $http.get(apiUrl + '/issues').then(function(resp) {
+    console.log('Success', resp.data);
+    $scope.issues = resp.data;
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  })
 
 			/*.then(function(response){
 				issues = response.data;
@@ -51,7 +71,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 		// 	}
 		// 	return null;
 
-    return $http.get(apiUrl + '/issues' + id)
+    return $http.get(apiUrl + '/issues/' + id)
 
   }
 }
@@ -59,6 +79,17 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 
 
 
+$scope.createIssue=function(){
+  $http({
+    method: 'POST',
+    url: apiUrl + '/issueTypes',
+    data: { issueTypes: 'issueTypes' },
+  }).success(function(){
+    data: $scope.issue
+  }).error(function(err){
+    console.error('ERR', err);
+  });
+};
 
 
 
