@@ -92,12 +92,6 @@ $scope.createIssue=function(){
 };
 
 
-
-
-
-
-
-
 /*
 
 .factory("IssueService", function($http, apiUrl) {
