@@ -73,6 +73,24 @@ return input.toUpperCase();
 
 })
 
+
+.controller('newIssueCtrl', function ($http, $scope, apiUrl){
+	$scope.createIssue=function(){
+		console.log('foo');
+	$http({
+		method: 'POST',
+		url: apiUrl + '/issues',
+		data: { issues: 'issues' },
+	}).success(function(){
+		data: $scope.issue
+	}).error(function(err){
+		console.error('ERR', err);
+	});
+};
+
+
+})
+
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
 
   var req = {
@@ -106,19 +124,10 @@ return input.toUpperCase();
        });
      };
 
+
 })
 
-// $scope.createIssue=function(){
-//   $http({
-//     method: 'POST',
-//     url: apiUrl + '/issueTypes',
-//     data: { issueTypes: 'issueTypes' },
-//   }).success(function(){
-//     data: $scope.issue
-//   }).error(function(err){
-//     console.error('ERR', err);
-//   });
-// };
+
 
 /*
 .factory("IssueService", function($http, apiUrl) {
