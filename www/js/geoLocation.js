@@ -3,8 +3,25 @@
 angular.module('citizen-engagement.geoLocation', ['angular-storage'])
 
 
-.factory('geoLocation', function (store) {
-    console.log('HEY');
+.controller("geoLocationCtrl", function($scope, GeoLocationService, geolocation ) {
+
+ 
+  GeoLocationService.setGeolocation().then(function(resp) {
+   // console.log('Success', resp.data);
+    $scope.issues = resp.data;
+    console.log('RspGeo' , $scope.issues);
+  }, function(err) {
+   console.error('ERR', err);
+    // err.status will contain the status code
+  })
+
+
+
+
+})
+
+.factory('GeoLocationService', function (geolocation) {
+   
     return {
         setGeolocation: function (latitude, longitude) {
 
@@ -16,8 +33,8 @@ angular.module('citizen-engagement.geoLocation', ['angular-storage'])
                         lat : lat,
                         lng : lng
                     }
-            //store.setObject('geoLocation', _position)
+                     console.log(_position);
                  })
                 }
             }
-})
+});
