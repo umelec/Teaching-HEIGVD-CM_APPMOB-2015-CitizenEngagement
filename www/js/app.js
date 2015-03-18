@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.camera', 'citizen-engagement.map', 'citizen-engagement.issue', 'geolocation'])
+angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth','citizen-engagement.user', 'citizen-engagement.constants', 'citizen-engagement.camera', 'citizen-engagement.map', 'citizen-engagement.issue', 'geolocation'])
 
 
 .run(function(AuthService, $rootScope, $state) {
@@ -16,7 +16,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 
     // If the user is not logged in and is trying to access another state than "login"...
     if (!AuthService.currentUserId && toState.name != 'login' && toState.name != 'newUser') {
-
       // ... then cancel the transition and go to the "login" state instead.
       event.preventDefault();
       $state.go('login');
@@ -61,7 +60,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       views: {
         // The "tab-newIssue" view corresponds to the <ion-nav-view name="tab-newIssue"> directive used in the tabs.html template.
         'tab-newIssue': {
-
           controller:'NewIssueCtrl',
           // This defines the template that will be inserted into the directive.
           templateUrl: 'templates/newIssue.html'
@@ -116,8 +114,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
   $urlRouterProvider.otherwise(function($injector) {
     $injector.get('$state').go('tab.issueList'); // Go to the new issue tab by default.
   })
-
-
 })
 
 .controller('BackCtrl', function ($scope, $ionicHistory, $state) {
@@ -125,7 +121,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
     $state.go('tab.issueList')
   };
 })
-
 
 .controller('goNewUser', function ($scope, $state) {
   $scope.goNewUser = function() {

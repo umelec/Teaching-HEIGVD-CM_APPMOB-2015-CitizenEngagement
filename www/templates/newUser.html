@@ -2,12 +2,13 @@
   <ion-nav-buttons side="secondary">
     <button type="button" ng-controller="goLogin" ng-click="goLogin()" class="button">Retour</button>
   </ion-nav-buttons>
-  <ion-content>
-    <p>Please full the following fields in order to create your user</p>
-    <form name="newUserForm">
-
+  <ion-content >
+    <form name="newUserForm" ng-submit="createUser()" ng-controller="RegisterCtrl">
       <!-- Ionic uses lists to group related input elements. -->
       <div class="list">
+        <label calss="item">
+          Please full the following fields in order to create your user
+        </label>
         <label class="item item-input">
           <!-- Note the required="required" attribute used for validation. -->
           <input type="text" placeholder="Prénom" ng-model="user.firstname" required="required"/>
@@ -31,7 +32,7 @@
         The "ng-click" directive indicates which scope function to call when the form is submitted.
         The "ng-disabled" directive is used to disable the button if the form is invalid (i.e. the first name or last name is missing).
       -->
-      <button class="button button-full button-positive" ng-click="register()" ng-disabled="loginForm.$invalid">S'enregistrer</button>
+      <button type="submit" class="button button-full button-positive" ng-disabled="loginForm.$invalid">S'enregistrer</button>
     </form>
   </ion-content>
 </ion-view>

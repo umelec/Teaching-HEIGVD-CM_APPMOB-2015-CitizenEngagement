@@ -2,8 +2,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 
 .controller('IssueListCrtl', function(IssueService, $scope){
-
-
   IssueService.getIssues().then(function(resp) {
    // console.log('Success', resp.data);
    $scope.issues = resp.data;
@@ -14,7 +12,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 })
 
 .controller('IssueCrtl', function(IssueService, $scope){
-
   Speaker.getIssue($stateParams.issueId).success(function(issue) {
     $scope.issue = issue;
   });
@@ -50,7 +47,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
          });
        }
      });
-
     }
   }
 })
@@ -134,7 +130,7 @@ $scope.yummy = function() {
    });
  };
 
- 
+
 
 
 })
