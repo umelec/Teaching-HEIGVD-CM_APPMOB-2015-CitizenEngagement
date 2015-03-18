@@ -3,8 +3,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 
 
 
-
-
 .controller('IssueListCrtl', function(IssueService, $scope){
 	
   IssueService.getIssues().then(function(resp) {
@@ -44,6 +42,29 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
   }
 })
 
+.filter("upcase", function() {
+return function(input) {
+return input.toUpperCase();
+};
+})
+
+.directive('actualSrc', function () {
+    return{
+        link: function postLink(scope, element, attrs) {
+            attrs.$observe('actualSrc', function(newVal, oldVal){
+                 if(newVal != undefined){
+                     var img = new Image();
+                     img.src = attrs.actualSrc;
+                     angular.element(img).bind('load', function () {
+                         element.attr("src", attrs.actualSrc);
+                     });
+                 }
+            });
+
+        }
+    }
+})
+
 
 
 
@@ -65,6 +86,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 })
 
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
+
   var req = {
    method: 'GET',
    url: apiUrl + '/issues/'+$stateParams.id
@@ -73,6 +95,9 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
  // Warning to update
  $http(req).success(function(data){
    $scope.issues = data;
+   console.log($scope.issues);
+
+
    // $scope.issue.issueTypeId= data[0].id;
  }).error(function(err){
    console.error('ERR', err);

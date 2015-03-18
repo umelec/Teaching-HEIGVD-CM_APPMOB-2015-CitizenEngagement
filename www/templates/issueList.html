@@ -1,9 +1,26 @@
 <ion-view view-title="Issues">
 
  <ion-nav-buttons side="secondary">
-    <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button ion-log-out"></button>
+      <button class="button button-icon icon ion-log-out"></button>
   </ion-nav-buttons>
+
+
+
   <ion-content class="has-header">
+
+  <div class="bar bar-header item-input-inset">
+  <label class="item-input-wrapper">
+    <i class="icon ion-ios7-search placeholder-icon"></i>
+    <input type="search" placeholder="Search">
+  </label>
+  <button class="button button-clear">
+    Cancel
+  </button>
+</div>
+
+
+
+
 
 
 
@@ -18,9 +35,9 @@
       </a>
     </div>  -->
     <ion-item class="item-avatar-left" ng-repeat="issue in issues" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
-        <img src="{{issue.imageUrl}}">
+        <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
         <h2>{{issue.description}}</h2>
-        Etat: {{issue.state}} - Mis à jour le: {{issue.updateOn}}
+        Etat: {{issue.state | upcase}} - Mis à jour le: {{issue.updateOn}}
     </ion-item>
   </ion-list>
   </ion-content>
