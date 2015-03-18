@@ -85,11 +85,19 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   });
 };
 
-$scope.yummy = function() {
+$scope.getPosition = function() {
 
-   var yummy = GeoLocationService.setGeolocation();
-   console.log("Yummy",yummy);
+  GeoLocationService.setGeolocation().then(function(resp) {
+   // console.log('Success', resp.data);
+   $scope.positions = resp.data;
+   console.log('getPosistion-resp', resp.data);
+
+ }, function(err) {
+   console.error('ERR', err);
+    // err.status will contain the status code
+  })
 };
+
 })
 
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
@@ -112,14 +120,10 @@ $scope.yummy = function() {
 
   getIssue();
 
-
-
  $scope.action={type:["comment"]};
 
  // warning to update !
  $scope.addComment=function(issueId){
-   console.log('post comment debug');
-   console.log(issueId);
    $http({
      method: 'POST',
      url: apiUrl + '/issues/'+$stateParams.id+'/actions',
@@ -131,12 +135,7 @@ $scope.yummy = function() {
      console.error('ERR', err);
    });
  };
-
-
-
-
 })
-
 
 
 /*
