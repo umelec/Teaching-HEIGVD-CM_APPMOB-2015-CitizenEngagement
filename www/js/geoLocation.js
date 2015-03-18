@@ -2,7 +2,7 @@
 
 angular.module('citizen-engagement.geoLocation', ['angular-storage'])
 
-/*
+
 .factory('geoLocation', function (store) {
     
     return {
@@ -21,6 +21,6 @@ angular.module('citizen-engagement.geoLocation', ['angular-storage'])
                 }
             }     
 })
-*/
+
 
 
