@@ -15,12 +15,10 @@ angular.module('citizen-engagement.geoLocation', ['angular-storage'])
     // err.status will contain the status code
   })
 
-
-
-
 })
 
 .factory('GeoLocationService', function (geolocation) {
+
    
     return {
         setGeolocation: function (latitude, longitude) {
@@ -33,8 +31,10 @@ angular.module('citizen-engagement.geoLocation', ['angular-storage'])
                         lat : lat,
                         lng : lng
                     }
-                     console.log(_position);
+                    console.log('seGeoPosition' , _position);
+                    return _position;
                  })
+               
                 }
             }
 });
