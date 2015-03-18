@@ -1,16 +1,17 @@
-angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
+angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'citizen-engagement.geoLocation'])
 
 
 .controller('IssueListCrtl', function(IssueService, $scope){
 
+
   IssueService.getIssues().then(function(resp) {
    // console.log('Success', resp.data);
-    $scope.issues = resp.data;
-  }, function(err) {
+   $scope.issues = resp.data;
+ }, function(err) {
    console.error('ERR', err);
     // err.status will contain the status code
   })
-  })
+})
 
 .controller('IssueCrtl', function(IssueService, $scope){
 
@@ -32,26 +33,26 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 
 
 .filter("upcase", function() {
-return function(input) {
-return input.toUpperCase();
-};
+  return function(input) {
+    return input.toUpperCase();
+  };
 })
 
 .directive('actualSrc', function () {
-    return{
-        link: function postLink(scope, element, attrs) {
-            attrs.$observe('actualSrc', function(newVal, oldVal){
-                 if(newVal != undefined){
-                     var img = new Image();
-                     img.src = attrs.actualSrc;
-                     angular.element(img).bind('load', function () {
-                         element.attr("src", attrs.actualSrc);
-                     });
-                 }
-            });
+  return{
+    link: function postLink(scope, element, attrs) {
+      attrs.$observe('actualSrc', function(newVal, oldVal){
+       if(newVal != undefined){
+         var img = new Image();
+         img.src = attrs.actualSrc;
+         angular.element(img).bind('load', function () {
+           element.attr("src", attrs.actualSrc);
+         });
+       }
+     });
 
-        }
     }
+  }
 })
 
 
@@ -74,19 +75,28 @@ return input.toUpperCase();
 })
 
 
-.controller('newIssueCtrl', function ($http, $scope, apiUrl){
+.controller('NewIssueCtrl', function($http, $scope, apiUrl, GeoLocationService){
 	$scope.createIssue=function(){
 		console.log('foo');
-	$http({
-		method: 'POST',
-		url: apiUrl + '/issues',
-		data: { issues: 'issues' },
-	}).success(function(){
-		data: $scope.issue
-	}).error(function(err){
-		console.error('ERR', err);
-	});
+   $http({
+    method: 'POST',
+    url: apiUrl + '/issues',
+    data: { issues: 'issues' },
+  }).success(function(){
+    data: $scope.issue
+  }).error(function(err){
+    console.error('ERR', err);
+  });
 };
+
+$scope.yummy = function() {
+
+   var yummy = GeoLocationService.setGeolocation();
+   console.log("Yummy",yummy);
+
+
+};
+
 
 
 })
@@ -110,19 +120,21 @@ return input.toUpperCase();
 
  // warning to update !
  $scope.addComment=function(){
-     $http({
-       method: 'POST',
-       url: apiUrl + '/issue/'+issue.id+'/actions',
-       headers: {
-         'Content-Type': application/json
-       },
-       data: { comments: 'comments' },
-     }).success(function(){
-         data: $scope.issue
-       }).error(function(err){
-         console.error('ERR', err);
-       });
-     };
+   $http({
+     method: 'POST',
+     url: apiUrl + '/issue/'+issue.id+'/actions',
+     headers: {
+       'Content-Type': application/json
+     },
+     data: { comments: 'comments' },
+   }).success(function(){
+     data: $scope.issue
+   }).error(function(err){
+     console.error('ERR', err);
+   });
+ };
+
+ 
 
 
 })
