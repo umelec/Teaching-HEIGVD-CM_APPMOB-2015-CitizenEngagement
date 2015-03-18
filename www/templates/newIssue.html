@@ -33,13 +33,14 @@
           <img ng-src="{{lastPhoto}}" style="max-width: 100%">
         </div>
         <div class="item">
-          <button ng-click="setGeolocation()" class="button button-block button-primary">Retrouver la localisation</button>
+          <button ng-click="getPosition()" class="button button-block button-primary icon ion-pinpoint"> Me localiser joder</button>
         </div>
         <div class="item">
-            <button class="button button-clear" ng-click="getPosition()">
-              PositionGeo
-             </button>
-          lat: {{lat}} long:
+
+       
+           <p> 
+              lat: {{position.lat}} long: {{position.lng}}
+          </p>
         </div>
 
       </div>

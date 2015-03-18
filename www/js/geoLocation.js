@@ -17,21 +17,19 @@ angular.module('citizen-engagement.geoLocation', ['angular-storage'])
 
 })
 
-.factory('GeoLocationService', function (geolocation) {
-
-   
+.factory('GeoLocationService', function (geolocation, $q) {
+  
     return {
-        setGeolocation: function (latitude, longitude) {
+        getGeolocation: function (options) {
+
 
                 geolocation.getLocation().then(function(data) {
                     var lat = data.coords.latitude;
                     var lng = data.coords.longitude;
-
                     var _position = {
                         lat : lat,
                         lng : lng
                     }
-                    console.log('seGeoPosition' , _position);
                     return _position;
                  })
                
