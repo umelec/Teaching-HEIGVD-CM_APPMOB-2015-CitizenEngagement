@@ -10,7 +10,7 @@ back-button-icon="ion-arrow-left-c"></ion-nav-bar>
 </ion-nav-buttons>
 
 <ion-content class="has-header">
-<div class="list card">
+<div class="list card" ng-controller="IssueShowCrtl">
   <div class="item item-thumbnail-left">
     <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
     <h2>{{issue.description}}</h2>
@@ -19,20 +19,24 @@ back-button-icon="ion-arrow-left-c"></ion-nav-bar>
     <p>Créé le: {{issue.createdOn}}</p>
     <p>Mis à jour le: {{issue.updatedOn}}
   </div>
-  <div class="item item-input-inset" ng-model="issue.comment">
-    <div class="list">
-      <label class="item item-input">
-        <textarea type="Comments" placeholder="Comments"></textarea>
-      </label>
+  <form ng-submit="addComment({{issue.id}})">
+    <div class="item item-input-inset" ng-model="issue.payload.text">
+      <div class="list">
+        <label class="item item-input">
+          <textarea type="Comments" placeholder="Comments" ng-model="action.payload.text"></textarea>
+        </label>
+      </div>
     </div>
-  </div>
-    <button class="button button-block button-positive"  ng-click="issue.addComment()" >
-      Ajouter un comentaire
-    </button>
-    <div class="item" ng-repeat="comment in issue.comments">
-      <p>{{comment.text}}</p>
-      <p>autheur: {{comment.author.name}} Envoyé le: {{comment.postedOn}}</p>
+    <div class="item">
+      <button type="submit" class="button button-block button-positive">
+        Ajouter un comentaire
+      </button>
     </div>
+  </form>
+  <div class="item" ng-repeat="comment in issue.comments">
+    <p>{{comment.text}}</p>
+    <p>autheur: {{comment.author.name}} Envoyé le: {{comment.postedOn}}</p>
   </div>
+</div>
 </ion-content>
 </ion-view>

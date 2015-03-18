@@ -89,12 +89,7 @@ $scope.yummy = function() {
 
    var yummy = GeoLocationService.setGeolocation();
    console.log("Yummy",yummy);
-
-
 };
-
-
-
 })
 
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
@@ -103,28 +98,35 @@ $scope.yummy = function() {
    method: 'GET',
 	 //url: "/issueDetails/:issueId"
 	 url: apiUrl + '/issues/'+$stateParams.id
- };
+  };
 
- // Warning to update
- $http(req).success(function(data){
+  var getIssue = function() {
+    // Warning to update
+    $http(req).success(function(data){
+      $scope.issue = data;
+      // $scope.issue.issueTypeId= data[0].id;
+    }).error(function(err){
+      console.log(err);
+    });
+  };
 
-   $scope.issue = data;
-   // $scope.issue.issueTypeId= data[0].id;
- }).error(function(err){
-   console.log(err);
- });
+  getIssue();
+
+
+
+ $scope.action={type:["comment"]};
 
  // warning to update !
- $scope.addComment=function(){
+ $scope.addComment=function(issueId){
+   console.log('post comment debug');
+   console.log(issueId);
    $http({
      method: 'POST',
-     url: apiUrl + '/issue/'+issue.id+'/actions',
-     headers: {
-       'Content-Type': application/json
-     },
-     data: { comments: 'comments' },
+     url: apiUrl + '/issues/'+$stateParams.id+'/actions',
+
+     data: $scope.action
    }).success(function(){
-     data: $scope.issue
+     getIssue();
    }).error(function(err){
      console.error('ERR', err);
    });

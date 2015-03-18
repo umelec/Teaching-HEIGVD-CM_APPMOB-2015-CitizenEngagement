@@ -5,15 +5,14 @@ angular.module('citizen-engagement.user', [ 'citizen-engagement.constants'])
   $scope.user={roles:["citizen"]};
 
 	$scope.createUser=function(){
-	   console.log('post user debug');
      $http({
-       method: 'POST',
-       url: apiUrl + '/users',
-       data: $scope.user
+        method: 'POST',
+        url: apiUrl + '/users',
+        data: $scope.user
      }).success(function(){
-       data: $scope.user
+        data: $scope.user
      }).error(function(err){
-       console.error('ERR', err);
+        console.error('ERR', err);
      });
    };
 });
