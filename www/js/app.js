@@ -71,7 +71,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       url: '/issueMap',
       views: {
         'tab-issueMap': {
-          templateUrl: 'templates/issueMap.html', 
+          templateUrl: 'templates/issueMap.html',
           controller: 'MapController'
         }
       }
@@ -88,7 +88,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       }
     })
 
-
     .state('tab.issueList', {
       url: '/issueList',
       views: {
@@ -98,9 +97,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
         }
       }
     })
-
-
-
 
     .state('newUser', {
       url: '/newuser',
@@ -128,5 +124,3 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
     $injector.get('$state').go('tab.issueList'); // Go to the new issue tab by default.
   })
 })
-
-

@@ -1,10 +1,8 @@
 angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 
 
-
-
 .controller('IssueListCrtl', function(IssueService, $scope){
-	
+
   IssueService.getIssues().then(function(resp) {
    // console.log('Success', resp.data);
     $scope.issues = resp.data;
@@ -12,23 +10,14 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
    console.error('ERR', err);
     // err.status will contain the status code
   })
-
   })
-
-
-
 
 .controller('IssueCrtl', function(IssueService, $scope){
 
   Speaker.getIssue($stateParams.issueId).success(function(issue) {
     $scope.issue = issue;
   });
-
-
 })
-
-
-
 
 .factory("IssueService", function($http, apiUrl) {
 	return {
@@ -37,10 +26,10 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
     },
     getIssue: function(id){
       return $http.get(apiUrl + '/issues/' + id);
-
     }
   }
 })
+
 
 .filter("upcase", function() {
 return function(input) {
@@ -67,7 +56,6 @@ return input.toUpperCase();
 
 
 
-
 //Issuecraetion controller
 .controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
   $scope.issue={};
@@ -89,18 +77,17 @@ return input.toUpperCase();
 
   var req = {
    method: 'GET',
-   url: apiUrl + '/issues/'+$stateParams.id
+	 //url: "/issueDetails/:issueId"
+	 url: apiUrl + '/issues/'+$stateParams.id
  };
 
  // Warning to update
  $http(req).success(function(data){
-   $scope.issues = data;
-   console.log($scope.issues);
 
-
+   $scope.issue = data;
    // $scope.issue.issueTypeId= data[0].id;
  }).error(function(err){
-   console.error('ERR', err);
+   console.log(err);
  });
 
  // warning to update !
@@ -121,10 +108,6 @@ return input.toUpperCase();
 
 })
 
-
-
-
-
 // $scope.createIssue=function(){
 //   $http({
 //     method: 'POST',
@@ -137,9 +120,7 @@ return input.toUpperCase();
 //   });
 // };
 
-
 /*
-
 .factory("IssueService", function($http, apiUrl) {
 	  var issueService = {
     getIssue: function() {
@@ -155,5 +136,4 @@ return input.toUpperCase();
   };
   return issueService;
 });
-
 */
