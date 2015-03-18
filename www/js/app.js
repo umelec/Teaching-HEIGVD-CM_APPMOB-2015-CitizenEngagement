@@ -101,17 +101,8 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
     })
 
     .state('newUser', {
-      url: '/newuser',
-      views: {
-        'tab-newUser': {
-          templateUrl: 'templates/newuser.html'
-        }
-      }
-    })
-
-    .state('register', {
-      url: '/register',
-      controller:'LoginCtrl',
+      url: '/newUser',
+      //controller:'LoginCtrl',
       templateUrl: 'templates/newUser.html'
     })
 
@@ -131,8 +122,20 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 
 .controller('BackCtrl', function ($scope, $ionicHistory, $state) {
   $scope.myGoBack = function() {
-    console.log('hey');
-
     $state.go('tab.issueList')
+  };
+})
+
+
+.controller('goNewUser', function ($scope, $state) {
+  $scope.goNewUser = function() {
+    console.log('hey')
+    $state.go('newUser')
+  };
+})
+
+.controller('goLogin', function ($scope, $state) {
+  $scope.goLogin = function() {
+    $state.go('login')
   };
 })
