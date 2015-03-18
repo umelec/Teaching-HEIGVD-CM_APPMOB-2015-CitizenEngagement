@@ -6,8 +6,8 @@ back-button-icon="ion-arrow-left-c"></ion-nav-bar>
 
 
 <ion-nav-buttons side="secondary">
-<button class="button" ng-click="/tabt/issueList()">Back</button>
-<button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
+  <button class="button" ng-controller="BackCtrl" ng-click="myGoBack()">Back</button>
+  <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
 </ion-nav-buttons>
 
 <ion-content class="has-header">
@@ -19,30 +19,21 @@ back-button-icon="ion-arrow-left-c"></ion-nav-bar>
     <p>Auteur: {{issue.owner.name}}</p>
     <p>Créé le: {{issue.createdOn}}</p>
     <p>Mis à jour le: {{issue.updatedOn}}
+  </div>
+  <div class="item item-input-inset" ng-model="issue.comment">
+    <div class="list">
+      <label class="item item-input">
+        <textarea type="Comments" placeholder="Comments"></textarea>
+      </label>
     </div>
-
-
-    <div class="item item-input-inset" ng-model="issue.comment">
-
-      <div class="list">
-        <label class="item item-input">
-          <textarea type="Comments" placeholder="Comments"></textarea>
-        </label>
-      </div>
-    </div>
-
+  </div>
     <button class="button button-block button-positive"  ng-click="issue.addComment()" >
       Ajouter un comentaire
     </button>
-
-
-
     <div class="item" ng-repeat="comment in issue.comments">
       <p>{{comment.text}}</p>
       <p>autheur: {{comment.author.name}} Envoyé le: {{comment.postedOn}}</p>
     </div>
-
-
   </div>
 </ion-content>
 </ion-view>

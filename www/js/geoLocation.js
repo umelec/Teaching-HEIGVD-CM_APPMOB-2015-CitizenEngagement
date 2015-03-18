@@ -4,10 +4,10 @@ angular.module('citizen-engagement.geoLocation', ['angular-storage'])
 
 
 .factory('geoLocation', function (store) {
-    
+    console.log('HEY');
     return {
         setGeolocation: function (latitude, longitude) {
-                
+
                 geolocation.getLocation().then(function(data) {
                     var lat = data.coords.latitude;
                     var lng = data.coords.longitude;
@@ -19,8 +19,5 @@ angular.module('citizen-engagement.geoLocation', ['angular-storage'])
             //store.setObject('geoLocation', _position)
                  })
                 }
-            }     
+            }
 })
-
-
-

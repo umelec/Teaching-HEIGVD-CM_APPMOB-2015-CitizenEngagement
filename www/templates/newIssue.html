@@ -33,6 +33,13 @@
           <button ng-click="getPhoto()" class="button button-block button-primary">Prendre une photo</button>
           <img ng-src="{{lastPhoto}}" style="max-width: 100%">
         </div>
+        <div class="item">
+          <button ng-click="setGeolocation()" class="button button-block button-primary">Retrouver la localisation</button>
+        </div>
+        <div class="item">
+          lat:  long:
+        </div>
+
       </div>
       <button type="submit" class="button button-block button-positive">Ajouter l'incident</button>
     </form>
