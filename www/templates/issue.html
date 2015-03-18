@@ -4,31 +4,34 @@
            back-button-type="button-icon"
            back-button-icon="ion-arrow-left-c"></ion-nav-bar>
   <ion-nav-buttons side="secondary">
-    <button class="button" ng-click="canGoBack && goBack()">Back</button>
+    <button class="button" ng-click="/tabt/issueList()">Back</button>
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
   </ion-nav-buttons>
 
-
-
-
-
-  
        <ion-content class="has-header">
         <div class="list card">
             <div class="item item-thumbnail-left">
                 <img ng-src="{{issue.imageUrl}}">
-                <h2>{{issue.descritpion}}</h2>
-                <p>{{issue.type}}</p>
+                <h2>{{issue.description}}</h2>
+                <p>Type: {{issue.issueType.name}}</p>
+                <p>Auteur: {{issue.owner.name}}</p>
+                <p>Créé le: {{issue.createdOn}}</p>
+                <p>Mis à jour le: {{issue.updatedOn}}
             </div>
-            <div class="item item-body">
-                <p>{{speaker.owner.name}}</p>
+            <div class="item" ng-model="issue.comment">
+              <label class="item item-input">
+                <i class="icon ion-chatbox"></i><p>Ajouter un commentaire</p>
+              </label>
+              <label class="item item-input">
+                  <input type="Comments" placeholder="Entrer votre commentaire ici">
+              </label>
+              <button type="button" ng-click="issue.addComment()"> Envoyer un commentaire </button>
             </div>
-            <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item">
-                    <i class="icon ion-chatbox"></i>
-                    Comment
-                </a>
+            <div class="item" ng-repeat="comment in issue.comments">
+              <p>{{comment.text}}</p>
+              <p>autheur: {{comment.author.name}} Envoyé le: {{comment.postedOn}}</p>
             </div>
+
         </div>
     </ion-content>
 </ion-view>
