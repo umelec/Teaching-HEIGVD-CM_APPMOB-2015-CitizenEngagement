@@ -8,7 +8,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 .controller('IssueListCrtl', function(IssueService, $scope){
 	
   IssueService.getIssues().then(function(resp) {
-    console.log('Success', resp.data);
+   // console.log('Success', resp.data);
     $scope.issues = resp.data;
   }, function(err) {
    console.error('ERR', err);
@@ -38,7 +38,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 			return $http.get(apiUrl + '/issues');
     },
     getIssue: function(id){
-
       return $http.get(apiUrl + '/issues/' + id);
 
     }
@@ -47,6 +46,55 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants'])
 
 
 
+
+//Issuecraetion controller
+.controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
+  $scope.issue={};
+  var req = {
+   method: 'GET',
+   url: apiUrl + '/issueTypes'
+ };
+
+ $http(req).success(function(data){
+  $scope.issueTypes = data;
+  $scope.issue.issueTypeId= data[0].id;
+}).error(function(err){
+  console.error('ERR', err);
+});
+
+})
+
+.controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
+  var req = {
+   method: 'GET',
+   url: apiUrl + '/issues/'+$stateParams.id
+ };
+
+ // Warning to update
+ $http(req).success(function(data){
+   $scope.issues = data;
+   // $scope.issue.issueTypeId= data[0].id;
+ }).error(function(err){
+   console.error('ERR', err);
+ });
+
+ // warning to update !
+ $scope.addComment=function(){
+     $http({
+       method: 'POST',
+       url: apiUrl + '/issue/'+issue.id+'/actions',
+       headers: {
+         'Content-Type': application/json
+       },
+       data: { comments: 'comments' },
+     }).success(function(){
+         data: $scope.issue
+       }).error(function(err){
+         console.error('ERR', err);
+       });
+     };
+
+})
 
 
 

@@ -71,7 +71,8 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       url: '/issueMap',
       views: {
         'tab-issueMap': {
-          templateUrl: 'templates/issueMap.html', controller: 'MapController'
+          templateUrl: 'templates/issueMap.html', 
+          controller: 'MapController'
         }
       }
     })
@@ -99,15 +100,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
     })
 
 
-    .state('tap.issueList', {
-      url: "/:issueId",
-      views: {
-        'tab-issueList' :{
-          templateUrl: "templates/issue.html",
-          controller: "IssueCtrl"
-        }
-      }
-    })
 
 
     .state('newUser', {
@@ -138,52 +130,3 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
 })
 
 
-
-//Issuecraetion controller
-.controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
-  $scope.issue={};
-  var req = {
-   method: 'GET',
-   url: apiUrl + '/issueTypes'
- };
-
- $http(req).success(function(data){
-  $scope.issueTypes = data;
-  $scope.issue.issueTypeId= data[0].id;
-}).error(function(err){
-  console.error('ERR', err);
-});
-
-})
-
-.controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
-  var req = {
-   method: 'GET',
-   url: apiUrl + '/issues/'+$stateParams.id
- };
-
- // Warning to update
- $http(req).success(function(data){
-   $scope.issues = data;
-   // $scope.issue.issueTypeId= data[0].id;
- }).error(function(err){
-   console.error('ERR', err);
- });
-
- // warning to update !
- $scope.addComment=function(){
-     $http({
-       method: 'POST',
-       url: apiUrl + '/issue/'+issue.id+'/actions',
-       headers: {
-         'Content-Type': application/json
-       },
-       data: { comments: 'comments' },
-     }).success(function(){
-         data: $scope.issue
-       }).error(function(err){
-         console.error('ERR', err);
-       });
-     };
-
-})

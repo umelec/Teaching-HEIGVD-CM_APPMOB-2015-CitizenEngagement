@@ -16,8 +16,8 @@
         <h2>{{issue.description}}</h2>
         <p>Etat: {{issue.state}} - Mis à jour le: {{issue.updateOn}}</p>
       </a>
-    </div>  >-->
-    <ion-item class="item-avatar-left" ng-repeat="issue in issues"  ui-sref="#/tab/issues/{{issue.id}}">
+    </div>  -->
+    <ion-item class="item-avatar-left" ng-repeat="issue in issues" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
         <img src="{{issue.imageUrl}}">
         <h2>{{issue.description}}</h2>
         Etat: {{issue.state}} - Mis à jour le: {{issue.updateOn}}

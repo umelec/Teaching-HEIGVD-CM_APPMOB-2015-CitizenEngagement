@@ -14,7 +14,7 @@
 
    $scope.mapCenter = {
     lat: 46.76,
-    lng: 63.62,
+    lng: 44.62,
     zoom: 8
   };
 
@@ -35,7 +35,7 @@
     //console.log(data.data);
 
     angular.forEach(data.data, function (issue) {
-      console.log('resp Issues' , issue)
+      // console.log('resp Issues' , issue)
       $scope.mapMarkers.push({
         lat: issue.lat,
         lng: issue.lng,
