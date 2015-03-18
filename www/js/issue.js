@@ -52,7 +52,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 })
 
 
-
 //Issuecraetion controller
 .controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
   $scope.issue={};
@@ -70,8 +69,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 })
 
-
-.controller('NewIssueCtrl', function($http, $scope, apiUrl, GeoLocationService){
+.controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
 	$scope.createIssue=function(){
 		console.log('foo');
    $http({
@@ -87,15 +85,19 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 $scope.getPosition = function() {
 
-  GeoLocationService.setGeolocation().then(function(resp) {
-   // console.log('Success', resp.data);
-   $scope.positions = resp.data;
-   console.log('getPosistion-resp', resp.data);
+   geolocation.getLocation().then(function(data) {
+                    var lat = data.coords.latitude;
+                    var lng = data.coords.longitude;
+                    var _position = {
+                        lat : lat,
+                        lng : lng
+                    }
 
- }, function(err) {
-   console.error('ERR', err);
-    // err.status will contain the status code
-  })
+                    $scope.position = _position;
+
+                  }, function(error){
+
+                });
 };
 
 
