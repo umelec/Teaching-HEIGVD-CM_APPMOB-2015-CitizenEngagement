@@ -16,7 +16,7 @@ angular.module('citizen-engagement.user', [ 'citizen-engagement.constants'])
              title: 'Utilisateur créé'
            });
            alertPopup.then(function(res) {
-             $state.go("login");
+             $state.go("login()");
            });
 
      }).error(function(err){
