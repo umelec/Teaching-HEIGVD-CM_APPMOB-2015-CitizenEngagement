@@ -8,11 +8,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
    console.error('ERR', err);
     // err.status will contain the status code
   })
-
-  $scope.clearSearch = function() {
-    $scope.data.searchQuery = '';
-  };
-
 })
 
 .controller('IssueCrtl', function(IssueService, $scope){
@@ -68,59 +63,23 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
    method: 'GET',
    url: apiUrl + '/issueTypes'
  };
-  $http(req).success(function(data){
-  $scope.issueTypes = data;
-  $scope.issue.issueTypeId= data[0].id;
-}).error(function(err){
-  console.error('ERR', err);
-});
-})
-
-.controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
-$scope.createIssue=function(){
-		console.log('foo');
-   $http({
-    method: 'POST',
-    url: apiUrl + '/issues',
-    data: { issues: 'issues' },
-  }).success(function(){
-    data: $scope.issue
-  }).error(function(err){
-    console.error('ERR', err);
-  });
-};
 
 
-$scope.getPosition = function() {
-
-   geolocation.getLocation().then(function(data) {
-
-                    var lat = data.coords.latitude;
-                    var lng = data.coords.longitude;
-                    var _position = {
-                        lat : lat,
-                        lng : lng
-                    }
-
-                  $scope.position = _position;
-
+ $http(req).success(function(data){
     $scope.issueTypes = data;
     $scope.issue.issueTypeId= data[0].id;
   }).error(function(err){
     console.error('ERR', err);
   });
-};
 })
 
 .controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
 
   $scope.createIssue=function(){
-  	console.log('foo');
-    console.log(new Error().stack);
     $http({
       method: 'POST',
       url: apiUrl + '/issues',
-      data: { issues: 'issues' },
+      data: $scope.issue
     }).success(function(){
       data: $scope.issue
     }).error(function(err){
@@ -137,6 +96,8 @@ $scope.getPosition = function() {
           lng : lng
       }
       $scope.position = _position;
+      $scope.issue.lat = lat;
+      $scope.issue.lng = lng
     },function(err){
       console.error('ERR', err);
     });

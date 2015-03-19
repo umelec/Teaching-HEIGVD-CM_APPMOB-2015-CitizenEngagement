@@ -12,14 +12,12 @@ angular.module('citizen-engagement.user', [ 'citizen-engagement.constants'])
      }).success(function(){
         data: $scope.user
 
-        $scope.showAlert = function() {
            var alertPopup = $ionicPopup.alert({
              title: 'Utilisateur créé'
            });
            alertPopup.then(function(res) {
-             console.log('should redirect to login');
+             $state.go("login");
            });
-         };
 
      }).error(function(err){
         console.error('ERR', err);
