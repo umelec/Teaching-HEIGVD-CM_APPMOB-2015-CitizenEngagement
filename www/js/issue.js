@@ -1,6 +1,5 @@
 angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'citizen-engagement.geoLocation'])
 
-
 .controller('IssueListCrtl', function(IssueService, $scope){
   IssueService.getIssues().then(function(resp) {
    // console.log('Success', resp.data);
@@ -28,7 +27,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   }
 })
 
-
 .filter("upcase", function() {
   return function(input) {
     return input.toUpperCase();
@@ -39,18 +37,17 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   return{
     link: function postLink(scope, element, attrs) {
       attrs.$observe('actualSrc', function(newVal, oldVal){
-       if(newVal != undefined){
-         var img = new Image();
-         img.src = attrs.actualSrc;
-         angular.element(img).bind('load', function () {
-           element.attr("src", attrs.actualSrc);
-         });
-       }
-     });
+        if(newVal != undefined){
+          var img = new Image();
+          img.src = attrs.actualSrc;
+          angular.element(img).bind('load', function () {
+            element.attr("src", attrs.actualSrc);
+          })
+        }
+      })
     }
   }
 })
-
 
 //Issuecraetion controller
 .controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
@@ -61,45 +58,42 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
  };
 
  $http(req).success(function(data){
-  $scope.issueTypes = data;
-  $scope.issue.issueTypeId= data[0].id;
-}).error(function(err){
-  console.error('ERR', err);
-});
-
-})
-
-.controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
-	$scope.createIssue=function(){
-		console.log('foo');
-   $http({
-    method: 'POST',
-    url: apiUrl + '/issues',
-    data: { issues: 'issues' },
-  }).success(function(){
-    data: $scope.issue
+    $scope.issueTypes = data;
+    $scope.issue.issueTypeId= data[0].id;
   }).error(function(err){
     console.error('ERR', err);
   });
-};
+})
+
+.controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
+
+  $scope.createIssue=function(){
+  	console.log('foo');
+    console.log(new Error().stack);
+    $http({
+      method: 'POST',
+      url: apiUrl + '/issues',
+      data: { issues: 'issues' },
+    }).success(function(){
+      data: $scope.issue
+    }).error(function(err){
+      console.error('ERR', err);
+    });
+  };
 
 $scope.getPosition = function() {
-
    geolocation.getLocation().then(function(data) {
-                    var lat = data.coords.latitude;
-                    var lng = data.coords.longitude;
-                    var _position = {
-                        lat : lat,
-                        lng : lng
-                    }
-
-                    $scope.position = _position;
-
-                  }, function(error){
-
-                });
-};
-
+      var lat = data.coords.latitude;
+      var lng = data.coords.longitude;
+      var _position = {
+          lat : lat,
+          lng : lng
+      }
+      $scope.position = _position;
+    },function(err){
+      console.error('ERR', err);
+    });
+  };
 })
 
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
@@ -129,16 +123,14 @@ $scope.getPosition = function() {
    $http({
      method: 'POST',
      url: apiUrl + '/issues/'+$stateParams.id+'/actions',
-
      data: $scope.action
    }).success(function(){
      getIssue();
    }).error(function(err){
      console.error('ERR', err);
    });
- };
+ }
 })
-
 
 /*
 .factory("IssueService", function($http, apiUrl) {
