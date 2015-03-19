@@ -13,9 +13,9 @@
 
 
    $scope.mapCenter = {
-    lat: 96.76,
-    lng: 94.62,
-    zoom: 8
+    lat: 46.7752435,
+    lng: 6.638055,
+    zoom: 12
   };
 
 
