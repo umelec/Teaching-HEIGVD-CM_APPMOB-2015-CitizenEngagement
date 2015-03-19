@@ -19,7 +19,7 @@ back-button-icon="ion-arrow-left-c"></ion-nav-bar>
     <p>Créé le: {{issue.createdOn}}</p>
     <p>Mis à jour le: {{issue.updatedOn}}
   </div>
-  <form ng-submit="addComment({{issue.id}})">
+  <form ng-submit="addComment(issue.id)">
     <div class="item item-input-inset" ng-model="issue.payload.text">
       <div class="list">
         <label class="item item-input">
