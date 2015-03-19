@@ -87,6 +87,14 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     });
   };
 
+
+$scope.getPhoto = function() {
+  CameraService.getPicture();
+
+
+
+  };
+
 $scope.getPosition = function() {
    geolocation.getLocation().then(function(data) {
       var lat = data.coords.latitude;
