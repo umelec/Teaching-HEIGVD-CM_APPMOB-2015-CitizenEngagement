@@ -9,6 +9,11 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
    console.error('ERR', err);
     // err.status will contain the status code
   })
+
+  $scope.clearSearch = function() {
+    $scope.data.searchQuery = '';
+  };
+
 })
 
 .controller('IssueCrtl', function(IssueService, $scope){
@@ -70,7 +75,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 })
 
 .controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
-	$scope.createIssue=function(){
+$scope.createIssue=function(){
 		console.log('foo');
    $http({
     method: 'POST',
@@ -83,9 +88,10 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   });
 };
 
-$scope.getPosition = function() {
+$scope.getPosition = function($ionicLoading) {
 
    geolocation.getLocation().then(function(data) {
+       
                     var lat = data.coords.latitude;
                     var lng = data.coords.longitude;
                     var _position = {
@@ -93,7 +99,7 @@ $scope.getPosition = function() {
                         lng : lng
                     }
 
-                    $scope.position = _position;
+                  $scope.position = _position;
 
                   }, function(error){
 
