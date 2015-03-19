@@ -22,9 +22,16 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 })
 
 .factory("IssueService", function($http, apiUrl) {
+ 
 	return {
 		getIssues: function() {
-			return $http.get(apiUrl + '/issues');
+      return $http({
+              method: 'GET',
+              url: apiUrl + '/issues',
+              headers: {
+              'x-pagination': '1;30'
+            }
+     })
     },
     getIssue: function(id){
       return $http.get(apiUrl + '/issues/' + id);
