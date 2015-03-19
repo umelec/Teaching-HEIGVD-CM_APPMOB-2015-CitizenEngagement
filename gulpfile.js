@@ -75,3 +75,7 @@ gulp.task('config-development', function(){
 gulp.task('config-production', function(){
   saveConfig('production');
 });
+
+gulp.task('config-android', function(){
+  saveConfig('android');
+});

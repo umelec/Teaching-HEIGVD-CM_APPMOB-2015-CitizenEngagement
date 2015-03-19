@@ -1,7 +1,7 @@
 <ion-view view-title="Issues">
 
 <ion-nav-buttons side="secondary">
-<button class="button button-icon icon ion-log-out"></button>
+  <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Déconection</button>
 </ion-nav-buttons>
 
 <ion-content class="has-header">
@@ -11,8 +11,13 @@
     <i class="icon ion-ios7-search placeholder-icon"></i>
     <input type="search" placeholder="Search">
   </label>
+</div>
 
-
+<div class="bar bar-header item-input-inset">
+    ordoner par:
+    <button type="button" ng-controller="" ng-click="" class="button">Date</button>
+    <button type="button" ng-controller="" ng-click="" class="button">Distance</button>
+    <button type="button" ng-controller="" ng-click="" class="button">Type</button>
 </div>
 
 <ion-list ng-controller="IssueListCrtl">

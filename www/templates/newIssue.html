@@ -23,13 +23,13 @@
             </label>
           </div>
         <label class="item item-input">
-          <textarea ng-model="description" placeholder="Description de l'incident"></textarea>
+          <textarea ng-model="issue.description" placeholder="Description de l'incident"></textarea>
         </label>
         <div class="item">
           Ajouter une photo
         </div>
         <div class="item">
-          <button type="button" ng-click="getPhoto()" class="button button-block button-primary">Prendre une photo</button>
+          <button type="button" ng-click="getPicture()" class="button button-block button-primary">Prendre une photo</button>
           <img ng-src="{{lastPhoto}}" style="max-width: 100%">
         </div>
         <div class="item">

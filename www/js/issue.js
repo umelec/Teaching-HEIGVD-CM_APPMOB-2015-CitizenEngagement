@@ -8,6 +8,10 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
    console.error('ERR', err);
     // err.status will contain the status code
   })
+
+  $scope.searchbydate=function(){
+    //mettre ici la recherche par date 
+  }
 })
 
 .controller('IssueCrtl', function(IssueService, $scope){
@@ -67,13 +71,13 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 .controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
 
+  $scope.issue = {};
+
   $scope.createIssue=function(){
-  	console.log('foo');
-    console.log(new Error().stack);
     $http({
       method: 'POST',
       url: apiUrl + '/issues',
-      data: { issues: 'issues' },
+      data: $scope.issue
     }).success(function(){
       data: $scope.issue
     }).error(function(err){
@@ -90,6 +94,8 @@ $scope.getPosition = function() {
           lng : lng
       }
       $scope.position = _position;
+      $scope.issue.lat = lat;
+      $scope.issue.lng = lng
     },function(err){
       console.error('ERR', err);
     });
