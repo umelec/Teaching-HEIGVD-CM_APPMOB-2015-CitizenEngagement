@@ -1,4 +1,4 @@
-angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'citizen-engagement.geoLocation'])
+angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'citizen-engagement.geoLocation','citizen-engagement.camera'])
 
 .controller('IssueListCrtl', function(IssueService, $scope){
   IssueService.getIssues().then(function(resp) {
@@ -83,10 +83,11 @@ $scope.createIssue=function(){
   });
 };
 
-$scope.getPosition = function($ionicLoading) {
+
+$scope.getPosition = function() {
 
    geolocation.getLocation().then(function(data) {
-       
+
                     var lat = data.coords.latitude;
                     var lng = data.coords.longitude;
                     var _position = {

@@ -1,6 +1,6 @@
 <ion-view view-title="New Issue">
   <ion-nav-buttons side="secondary">
-    <button class="button" ng-controller="BackCtrl" ng-click="myGoBack()">Back</button>
+    <button type="button" class="button" ng-controller="BackCtrl" ng-click="myGoBack()">Back</button>
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
   </ion-nav-buttons>
 
@@ -28,9 +28,9 @@
         <div class="item">
           Ajouter une photo
         </div>
-        <div class="item">
-          <button type="button" ng-click="getPicture()" class="button button-block button-primary">Prendre une photo !</button>
-          <img ng-src="{{lastPhoto}}" style="max-width: 100%">
+        <div class="item" ng-controller="PhotoCtrl">
+          <button type="button" ng-click="getPhoto()" class="button button-block button-primary">Prendre une photo !</button>
+          <img ng-src="{{lastPhoto}}" style="max-width: 50%">
         </div>
         <div class="item">
           <button type="button" ng-click="getPosition()" class="button button-block button-primary icon ion-pinpoint"> Me localiser joder</button>

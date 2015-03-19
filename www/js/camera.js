@@ -1,18 +1,18 @@
 angular.module('citizen-engagement.camera', ['citizen-engagement.constants'])
 
-.config(function($compileProvider){
-  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-})
+// .config(function($compileProvider){
+//   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+// })
 
 
-.controller('photoCtrl', function(CameraService, $http, qimgUrl, qimgToken) {
-
- CameraService.getPicture({
+.controller("PhotoCtrl", function(CameraService, $http, qimgUrl, qimgToken) {
+// take the picture
+CameraService.getPicture({
   quality: 75,
   targetWidth: 400,
   targetHeight: 300,
-  // return base64-encoded data instead of a file
-  destinationType: Camera.DestinationType.DATA_URL
+// return base64-encoded data instead of a file
+destinationType: Camera.DestinationType.DATA_URL
 }).then(function(imageData) {
 // upload the image
 $http({
@@ -29,24 +29,29 @@ $http({
 // do something with imageUrl
 });
 });
+})//end Controller
 
-})
-
-.factory('CameraService', ['$q', function($q) {
-
+.factory("CameraService", function($q) {
   return {
     getPicture: function(options) {
-      var q = $q.defer();
-
+      var deferred = $q.defer();
       navigator.camera.getPicture(function(result) {
-        // Do any magic you need
-        q.resolve(result);
-      }, function(err) {
-        q.reject(err);
-      }, options);
-
-      return q.promise;
+// do any magic you need
+deferred.resolve(result);
+}, function(err) {
+  deferred.reject(err);
+}, options);
+      return deferred.promise;
     }
   }
-}])
+});
 
+
+
+// {
+//     quality: 75,
+//     targetWidth: 400,
+//     targetHeight: 300,
+//   // return base64-encoded data instead of a file
+//   destinationType: Camera.DestinationType.DATA_URL
+// }
