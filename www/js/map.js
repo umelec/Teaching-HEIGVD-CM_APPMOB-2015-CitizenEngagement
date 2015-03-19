@@ -10,15 +10,11 @@
  		tileLayer: mapboxTileLayer
  	};
 
-
-
    $scope.mapCenter = {
     lat: 46.7752435,
     lng: 6.638055,
     zoom: 12
   };
-
-
 
   geolocation.getLocation().then(function(data) {
     $scope.mapCenter.lat = data.coords.latitude;
@@ -29,7 +25,6 @@
   });
 
   $scope.mapMarkers = [];
-
 
   IssueService.getIssues().then(function(data){
     //console.log(data.data);
@@ -47,12 +42,5 @@
         }
       })
     });
-
-
-
   });
-
 });
-
-
-

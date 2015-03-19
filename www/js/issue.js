@@ -1,4 +1,4 @@
-angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'citizen-engagement.geoLocation'])
+angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'citizen-engagement.geoLocation','citizen-engagement.camera'])
 
 .controller('IssueListCrtl', function(IssueService, $scope){
   IssueService.getIssues().then(function(resp) {
@@ -56,6 +56,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
    method: 'GET',
    url: apiUrl + '/issueTypes'
  };
+
 
  $http(req).success(function(data){
     $scope.issueTypes = data;
