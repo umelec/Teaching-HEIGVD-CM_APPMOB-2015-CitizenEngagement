@@ -61,15 +61,12 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
    method: 'GET',
    url: apiUrl + '/issueTypes'
  };
-
- $http(req).success(function(data){
-<<<<<<< HEAD
+  $http(req).success(function(data){
   $scope.issueTypes = data;
   $scope.issue.issueTypeId= data[0].id;
 }).error(function(err){
   console.error('ERR', err);
 });
-
 })
 
 .controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
@@ -104,7 +101,8 @@ $scope.getPosition = function($ionicLoading) {
   }).error(function(err){
     console.error('ERR', err);
   });
-}
+};
+})
 
 .controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
 
