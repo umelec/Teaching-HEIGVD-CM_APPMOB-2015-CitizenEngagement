@@ -4,7 +4,7 @@
   <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Déconection</button>
 </ion-nav-buttons>
 
-<ion-content class="has-header">
+<ion-content class="has-header" ng-controller="IssueListCrtl">
 
 <div class="bar bar-header item-input-inset">
   <label class="item-input-wrapper">
@@ -15,12 +15,11 @@
 
 <div class="bar bar-header item-input-inset">
     ordoner par:
-    <button type="button" ng-controller="" ng-click="" class="button">Date</button>
-    <button type="button" ng-controller="" ng-click="" class="button">Distance</button>
-    <button type="button" ng-controller="" ng-click="" class="button">Type</button>
+    <button type="button" ng-click="" class="button">Date</button>
+    <button type="button" ng-click="searchbydate()" class="button">Distance</button>
+    <button type="button" ng-click="" class="button">Type</button>
 </div>
-
-<ion-list ng-controller="IssueListCrtl">
+<ion-list>
 <ion-item class="item-avatar-left" ng-repeat="issue in issues" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
 <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
 <h2>{{issue.description}}</h2>

@@ -11,8 +11,8 @@ angular.module('citizen-engagement.camera', ['citizen-engagement.constants'])
   quality: 75,
   targetWidth: 400,
   targetHeight: 300,
-// return base64-encoded data instead of a file
-destinationType: Camera.DestinationType.DATA_URL
+  // return base64-encoded data instead of a file
+  destinationType: Camera.DestinationType.DATA_URL
 }).then(function(imageData) {
 // upload the image
 $http({
