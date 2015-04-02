@@ -1,6 +1,6 @@
 angular.module('citizen-engagement.user', [ 'citizen-engagement.constants'])
 
-.controller('RegisterCtrl', function($http, $scope, apiUrl, $ionicPopup){
+.controller('RegisterCtrl', function($http, $scope, apiUrl, $ionicPopup, $state){
 
   $scope.user={roles:["citizen"]};
 
@@ -16,11 +16,16 @@ angular.module('citizen-engagement.user', [ 'citizen-engagement.constants'])
              title: 'Utilisateur créé'
            });
            alertPopup.then(function(res) {
-             $state.go("login()");
+             $state.go("login");
            });
 
      }).error(function(err){
+
+       var alertPopup = $ionicPopup.alert({
+         title: 'Une erreur est intervenue'
+       });
         console.error('ERR', err);
+
      });
    };
 });

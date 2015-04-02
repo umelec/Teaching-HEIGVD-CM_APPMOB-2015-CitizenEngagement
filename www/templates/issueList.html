@@ -23,7 +23,7 @@
 <ion-item class="item-avatar-left" ng-repeat="issue in issues" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
 <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
 <h2>{{issue.description}}</h2>
-Etat: {{issue.state}} - Mis à jour le: {{issue.updatedOn}}
+Etat: {{issue.state}} - Mis à jour le: {{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}}
 </ion-item>
 </ion-list>
 </ion-content>
