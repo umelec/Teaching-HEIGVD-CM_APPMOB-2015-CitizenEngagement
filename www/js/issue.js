@@ -40,7 +40,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
         method: 'GET',
         url: apiUrl + '/issues',
         headers: {
-          'x-pagination': p + ';30'
+          'x-pagination': p + ';1000'
         }
       })
     },
@@ -96,14 +96,10 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     $scope.$on('$ionicView.beforeEnter', function() {
       // Re-initialize the user object every time the screen is displayed.
       // The first name and last name will be automatically filled from the form thanks to AngularJS's two-way binding.
-      $scope.position = {};
       $scope.issue = {};
-      $scope.lat
-      $scope.lng = "";
     });
 
-
-    $scope.createIssue=function( $ionicPopup){
+    $scope.createIssue=function(){
       $http({
         method: 'POST',
         url: apiUrl + '/issues',
@@ -125,7 +121,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
         });
         alertPopup.then(function(res) {
         });
-
         console.error('ERR', err);
       });
     };
