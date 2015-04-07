@@ -28,13 +28,14 @@
         <div class="item">
           Ajouter une photo
         </div>
-        <div class="item">
-          <button type="button" ng-click="getPhoto()" class="button button-block button-primary">Prendre une photo !</button>
+        <div class="item" ng-controller="PhotoCtrl">
+          <button type="button" ng-click="getPhoto()" class="button button-block button-primary" > <i class="icon ion-loading-c"></i>Prendre une photo !</button>
           <img ng-src="{{lastPhoto}}" style="max-width: 50%">
+          {{lastPhoto}}
         </div>
 
         <div class="item">
-          <button type="button" ng-click="getPosition()" class="button button-block button-primary icon ion-pinpoint"> Me localiser joder</button>
+          <button type="button" ng-click="getPosition()" class="button button-block button-primary icon ion-pinpoint "> Me localiser joder</button>
         </div>
         <div class="item">
            <p>

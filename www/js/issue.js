@@ -73,7 +73,17 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   });
 })
 
-.controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation){
+.controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation, $ionicLoading){
+
+    // The $ionicView.beforeEnter event happens every time the screen is displayed.
+    $scope.$on('$ionicView.beforeEnter', function() {
+      // Re-initialize the user object every time the screen is displayed.
+      // The first name and last name will be automatically filled from the form thanks to AngularJS's two-way binding.
+      $scope.position = {};
+      $scope.lat = " ";
+      $scope.lng = " ";
+    });
+
 
   $scope.createIssue=function(){
     $http({
@@ -88,15 +98,20 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   };
 
 
-$scope.getPhoto = function() {
-  CameraService.getPicture();
-
-
-
-  };
 
 $scope.getPosition = function() {
+
+  
+    $ionicLoading.show({
+      template: 'Loading...',
+      delay: 750
+    });
+
+
+
    geolocation.getLocation().then(function(data) {
+      $ionicLoading.hide();
+
       var lat = data.coords.latitude;
       var lng = data.coords.longitude;
       var _position = {
@@ -106,7 +121,9 @@ $scope.getPosition = function() {
       $scope.position = _position;
       $scope.issue.lat = lat;
       $scope.issue.lng = lng
+      
     },function(err){
+       $ionicLoading.hide();
       console.error('ERR', err);
     });
   };

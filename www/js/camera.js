@@ -5,15 +5,26 @@ angular.module('citizen-engagement.camera', ['citizen-engagement.constants'])
 // })
 
 
-.controller("PhotoCtrl", function(CameraService, $http, qimgUrl, qimgToken) {
+.controller("PhotoCtrl", function(CameraService, $http, qimgUrl, qimgToken, $scope) {
 // take the picture
+
+
+$scope.getPhoto = function(){
+
 CameraService.getPicture({
   quality: 75,
   targetWidth: 400,
   targetHeight: 300,
-// return base64-encoded data instead of a file
-destinationType: Camera.DestinationType.DATA_URL
+  sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+  encodingType: 0,     // 0=JPG 1=PNG
+  // return base64-encoded data instead of a file
+  destinationType: Camera.DestinationType.DATA_URL
+
+
+
 }).then(function(imageData) {
+
+
 // upload the image
 $http({
   method: "POST",
@@ -27,8 +38,13 @@ $http({
 }).success(function(data) {
   var imageUrl = data.url;
 // do something with imageUrl
+  $scope.lastPhoto =  "https://warm-bastion-3094.herokuapp.com/api" + imageUrl;
+
 });
 });
+
+
+}; 
 })//end Controller
 
 .factory("CameraService", function($q) {
