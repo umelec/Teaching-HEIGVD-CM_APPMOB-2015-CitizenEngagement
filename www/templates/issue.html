@@ -5,7 +5,7 @@ back-button-type="button-icon"
 back-button-icon="ion-arrow-left-c"></ion-nav-bar>
 
 <ion-nav-buttons side="secondary">
-  <button class="button" ng-controller="BackCtrl" ng-click="myGoBack()">Retour</button>
+  <a class="button icon-left ion-chevron-left button-clear button-dark" ng-controller="BackCtrl" ng-click="myGoBack()">Retour</a>
   <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Déconnection</button>
 </ion-nav-buttons>
 

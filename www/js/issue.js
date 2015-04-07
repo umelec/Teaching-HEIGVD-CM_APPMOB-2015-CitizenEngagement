@@ -14,6 +14,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   Speaker.getIssue($stateParams.issueId).success(function(issue) {
     $scope.issue = issue;
   });
+
 })
 
 .factory("IssueService", function($http, apiUrl) {
@@ -56,6 +57,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   }
 })
 
+
 //Issuecraetion controller
 .controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
   $scope.issue={};
@@ -79,6 +81,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     $scope.$on('$ionicView.beforeEnter', function() {
       // Re-initialize the user object every time the screen is displayed.
       // The first name and last name will be automatically filled from the form thanks to AngularJS's two-way binding.
+
       $scope.position = {};
       $scope.issue = {};
       $scope.lat
@@ -113,14 +116,13 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   };
 
 $scope.getPosition = function() {
-
+    console.log('position on load');
     $ionicLoading.show({
-      template: 'Loading...',
+      template: '<ion-spinner  class="spinner-light" icon="ripple"></ion-spinner>',
       delay: 750
     });
       geolocation.getLocation().then(function(data) {
          $ionicLoading.hide();
-
          //console.error ('lat', data.coords.latitude);
 
          //var lat = data.coords.latitude;
@@ -141,6 +143,26 @@ $scope.getPosition = function() {
 
 
   }
+
+geolocation.getLocation().then(function(data) {
+  console.log('click');
+      $ionicLoading.hide();
+
+      var lat = data.coords.latitude;
+      var lng = data.coords.longitude;
+      var _position = {
+          lat : lat,
+          lng : lng
+      }
+      $scope.position = _position;
+      $scope.issue.lat = lat;
+      $scope.issue.lng = lng;
+
+    },function(err){
+       $ionicLoading.hide();
+      console.error('ERR', err);
+    });
+  };
 
 $scope.getPhoto = function() {
   CameraService.getPicture();
