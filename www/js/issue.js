@@ -118,7 +118,7 @@ $scope.getPosition = function() {
 
   
     $ionicLoading.show({
-      template: 'Loading...',
+      template: '<ion-spinner  class="spinner-light" icon="ripple"></ion-spinner>',
       delay: 750
     });
 
