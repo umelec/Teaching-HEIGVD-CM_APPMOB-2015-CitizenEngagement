@@ -14,6 +14,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   Speaker.getIssue($stateParams.issueId).success(function(issue) {
     $scope.issue = issue;
   });
+
 })
 
 .factory("IssueService", function($http, apiUrl) {
@@ -30,7 +31,16 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     },
     getIssue: function(id){
       return $http.get(apiUrl + '/issues/' + id);
-    }
+    },
+    findByName: function(searchKey) {
+                var deferred = $q.defer();
+                var results = employees.filter(function(element) {
+                    var fullName = element.firstName + " " + element.lastName;
+                    return fullName.toLowerCase().indexOf(searchKey.toLowerCase()) > -1;
+                });
+                deferred.resolve(results);
+                return deferred.promise;
+            }
   }
 })
 
@@ -56,6 +66,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   }
 })
 
+
 //Issuecraetion controller
 .controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
   $scope.issue={};
@@ -79,9 +90,9 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     $scope.$on('$ionicView.beforeEnter', function() {
       // Re-initialize the user object every time the screen is displayed.
       // The first name and last name will be automatically filled from the form thanks to AngularJS's two-way binding.
+     
       $scope.position = {};
-      $scope.lat = " ";
-      $scope.lng = " ";
+
     });
 
 
@@ -113,22 +124,15 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 
 
-
 $scope.getPosition = function() {
-
-  
+    console.log('position on load');
     $ionicLoading.show({
       template: '<ion-spinner  class="spinner-light" icon="ripple"></ion-spinner>',
       delay: 750
     });
 
-
-
-$scope.getPhoto = function() {
-  CameraService.getPicture();
-  };
-
-   geolocation.getLocation().then(function(data) {
+geolocation.getLocation().then(function(data) {
+  console.log('click');
       $ionicLoading.hide();
 
       var lat = data.coords.latitude;
@@ -139,13 +143,23 @@ $scope.getPhoto = function() {
       }
       $scope.position = _position;
       $scope.issue.lat = lat;
-      $scope.issue.lng = lng
+      $scope.issue.lng = lng;
       
     },function(err){
        $ionicLoading.hide();
       console.error('ERR', err);
     });
   };
+
+
+
+
+
+$scope.getPhoto = function() {
+  CameraService.getPicture();
+  };
+
+
 })
 
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){

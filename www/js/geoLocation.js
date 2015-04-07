@@ -1,5 +1,3 @@
-
-
 angular.module('citizen-engagement.geoLocation', ['angular-storage'])
 
 
@@ -22,8 +20,8 @@ angular.module('citizen-engagement.geoLocation', ['angular-storage'])
     return {
         getGeolocation: function (options) {
 
-
                 geolocation.getLocation().then(function(data) {
+                  console.log('it s me');
                     var lat = data.coords.latitude;
                     var lng = data.coords.longitude;
                     var _position = {
