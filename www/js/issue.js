@@ -17,7 +17,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 })
 
 .factory("IssueService", function($http, apiUrl) {
- 
+
 	return {
 		getIssues: function() {
       return $http({
@@ -92,10 +92,25 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
       data: $scope.issue
     }).success(function(){
       data: $scope.issue
+
+      var alertPopup = $ionicPopup.alert({
+        title: 'Incident créé'
+      });
+      alertPopup.then(function(res) {
+      });
+
     }).error(function(err){
+
+      var alertPopup = $ionicPopup.alert({
+        title: 'Oups un problème est intervenu'
+      });
+      alertPopup.then(function(res) {
+      });
+
       console.error('ERR', err);
     });
   };
+
 
 
 
@@ -108,6 +123,10 @@ $scope.getPosition = function() {
     });
 
 
+
+$scope.getPhoto = function() {
+  CameraService.getPicture();
+  };
 
    geolocation.getLocation().then(function(data) {
       $ionicLoading.hide();

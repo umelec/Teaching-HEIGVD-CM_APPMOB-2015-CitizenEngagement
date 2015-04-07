@@ -5,7 +5,7 @@ back-button-type="button-icon"
 back-button-icon="ion-arrow-left-c"></ion-nav-bar>
 
 <ion-nav-buttons side="secondary">
-  <button class="button" ng-controller="BackCtrl" ng-click="myGoBack()">Back</button>
+  <button class="button" ng-controller="BackCtrl" ng-click="myGoBack()">Retour</button>
   <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Déconnection</button>
 </ion-nav-buttons>
 
@@ -20,12 +20,10 @@ back-button-icon="ion-arrow-left-c"></ion-nav-bar>
     <p>Mis à jour le: {{issue.updatedOn}}
   </div>
   <form ng-submit="addComment(issue.id)">
-    <div class="item item-input-inset" ng-model="issue.payload.text">
-      <div class="list">
-        <label class="item item-input">
-          <textarea type="Comments" placeholder="Comments" ng-model="action.payload.text"></textarea>
-        </label>
-      </div>
+    <div class="item" >
+      <label class="item item-input">
+        <textarea type="Comments" placeholder="Commentaires" ng-model="action.payload.text"></textarea>
+      </label>
     </div>
     <div class="item">
       <button type="submit" class="button button-block button-positive">
