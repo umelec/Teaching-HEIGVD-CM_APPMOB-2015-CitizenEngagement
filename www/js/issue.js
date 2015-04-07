@@ -31,16 +31,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     },
     getIssue: function(id){
       return $http.get(apiUrl + '/issues/' + id);
-    },
-    findByName: function(searchKey) {
-                var deferred = $q.defer();
-                var results = employees.filter(function(element) {
-                    var fullName = element.firstName + " " + element.lastName;
-                    return fullName.toLowerCase().indexOf(searchKey.toLowerCase()) > -1;
-                });
-                deferred.resolve(results);
-                return deferred.promise;
-            }
+    }
   }
 })
 
