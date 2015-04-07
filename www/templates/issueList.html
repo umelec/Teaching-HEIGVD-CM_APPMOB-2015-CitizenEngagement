@@ -15,13 +15,13 @@
 
 
 <div class="bar bar-header item-input-inset">
-  Trier par:
-  <button type="button" ng-click="predicate = 'owner.name'; reverse=!reverse;" class="button">Auteur</button>
+  ordoner par:
+  <button type="button" ng-click="predicate = 'owner.name'; reverse=!reverse;" class="button">Nom d'auteur</button>
 
-  <button type="button" ng-click="predicate = 'updatedOn'; reverse=!reverse;" class="button">Date</button>
+  <button type="button" ng-click="predicate = 'updatedOn'; reverse=!reverse;" class="button">date</button>
+
 
   <button type="button" ng-click="searchbydate()" class="button">Distance</button>
-  
   <button type="button" ng-click="" class="button">Type</button>
 </div>
 
@@ -30,7 +30,7 @@
 <ion-item class="item-avatar-left" ng-repeat="issue in issues | filter:search.value | orderBy:predicate:reverse" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
 <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
 <h2>{{issue.description}}</h2>
-Etat: {{issue.state}} - Mis à jour le: {{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}} - Créé par: {{issue.owner.name}}
+<p><i class="sbInfos">Etat:</i> {{issue.state}} - Mis à jour le: {{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}} - Créé par: {{issue.owner.name}}</p>
 </ion-item>
 </ion-list>
 <ion-infinite-scroll
