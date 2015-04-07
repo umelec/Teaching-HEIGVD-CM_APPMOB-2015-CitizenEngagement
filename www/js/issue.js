@@ -23,8 +23,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
       $scope.ownerOrd = 'ion-chevron-up'
     }
   };
-
-
 })
 
 .controller('IssueCrtl', function(IssueService, $scope){
@@ -76,7 +74,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 
 //Issuecraetion controller
-.controller('IssueTypeListCrtl', function($http, $scope, apiUrl){
+.controller('IssueTypeListCrtl', function($http, $scope, apiUrl, $ionicPopup){
   $scope.issue={};
   var req = {
    method: 'GET',
@@ -92,14 +90,12 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 });
 })
 
-.controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation, $ionicLoading){
+.controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation, $ionicLoading, $ionicPopup, $state){
 
     // The $ionicView.beforeEnter event happens every time the screen is displayed.
     $scope.$on('$ionicView.beforeEnter', function() {
       // Re-initialize the user object every time the screen is displayed.
       // The first name and last name will be automatically filled from the form thanks to AngularJS's two-way binding.
-      d898844197ccc676f6d175bc6b86ee31813f
-
       $scope.position = {};
       $scope.issue = {};
       $scope.lat
@@ -107,7 +103,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     });
 
 
-    $scope.createIssue=function(){
+    $scope.createIssue=function( $ionicPopup){
       $http({
         method: 'POST',
         url: apiUrl + '/issues',
@@ -119,6 +115,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
           title: 'Incident créé'
         });
         alertPopup.then(function(res) {
+
         });
 
       }).error(function(err){
@@ -135,7 +132,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 
     $scope.getPosition = function() {
-      console.log('position on load');
       $ionicLoading.show({
         template: '<ion-spinner  class="spinner-light" icon="ripple"></ion-spinner>',
         delay: 750
@@ -159,12 +155,9 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
         $ionicLoading.hide();
         console.error('ERR', err);
       });
-
-
     }
 
     geolocation.getLocation().then(function(data) {
-      console.log('click');
       $ionicLoading.hide();
 
       var lat = data.coords.latitude;
@@ -182,7 +175,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
      $ionicLoading.hide();
      console.error('ERR', err);
    });
-    
+
   $scope.getPhoto = function() {
     CameraService.getPicture();
   };
