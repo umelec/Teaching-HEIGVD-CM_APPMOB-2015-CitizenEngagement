@@ -1,7 +1,7 @@
 <ion-view view-title="Issues">
 
 <ion-nav-buttons side="secondary">
-  <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Déconnection</button>
+<button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Déconnection</button>
 </ion-nav-buttons>
 
 <ion-content class="has-header" ng-controller="IssueListCrtl">
@@ -9,35 +9,33 @@
 <div class="bar bar-header item-input-inset">
   <label class="item-input-wrapper">
     <i class="icon ion-ios7-search placeholder-icon"></i>
-    <input type="search" placeholder="Search">
+    <input type="search" placeholder="Search"  ng-model="filter">
   </label>
-  <button class="button button-clear">
-    Cancel
-  </button>
 </div>
 
 
 <div class="bar bar-header item-input-inset">
-    ordoner par:
-    <button type="button" ng-click="predicate = 'sortByDate'; reverse=!reverse;sortByDate(ord)" class="button">Date</button>
-    <button type="button" ng-click="searchbydate()" class="button">Distance</button>
-    <button type="button" ng-click="" class="button">Type</button>
+  ordoner par:
+  <button type="button" ng-click="predicate = 'owner.name'; reverse=!reverse;" class="button">Nom d'auteur</button>
+
+  <button type="button" ng-click="predicate = 'updatedOn'; reverse=!reverse;" class="button">date</button>
+
+  <button type="button" ng-click="searchbydate()" class="button">Distance</button>
+  <button type="button" ng-click="" class="button">Type</button>
 </div>
-
-
 
 
 <ion-list>
 <ion-item class="item-avatar-left" ng-repeat="issue in issues | filter:search.value | orderBy:predicate:reverse" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
 <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
 <h2>{{issue.description}}</h2>
-Etat: {{issue.state}} - Mis à jour le: {{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}}
+Etat: {{issue.state}} - Mis à jour le: {{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}} - Créé par: {{issue.owner.name}}
 </ion-item>
 </ion-list>
 <ion-infinite-scroll
-  ng-if="moreDataCanBeLoaded()"
-  icon="ion-loading-c"
-  on-infinite="loadMoreData() distance="1%"">
+ng-if="moreDataCanBeLoaded()"
+icon="ion-loading-c"
+on-infinite="loadMoreData() distance="1%"">
 </ion-infinite-scroll>
 
 

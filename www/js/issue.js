@@ -1,13 +1,30 @@
 angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'citizen-engagement.geoLocation','citizen-engagement.camera'])
 
 .controller('IssueListCrtl', function(IssueService, $scope){
-  IssueService.getIssues().then(function(resp) {
+
+  var p = 0;
+  IssueService.getIssues(p).then(function(resp) {
    // console.log('Success', resp.data);
+    console.log(resp.data);
    $scope.issues = resp.data;
+
  }, function(err) {
    console.error('ERR', err);
     // err.status will contain the status code
   })
+
+
+  $scope.togOwner = function(ord) {
+    $scope.recentOrd = '';
+    $scope.stateOrd = '';
+    if ($scope.reverse) {
+      $scope.ownerOrd = 'ion-chevron-down'
+    } else {
+      $scope.ownerOrd = 'ion-chevron-up'
+    }
+  };
+
+
 })
 
 .controller('IssueCrtl', function(IssueService, $scope){
@@ -20,14 +37,14 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 .factory("IssueService", function($http, apiUrl) {
 
 	return {
-		getIssues: function() {
+		getIssues: function(p) {
       return $http({
-              method: 'GET',
-              url: apiUrl + '/issues',
-              headers: {
-              'x-pagination': '1;30'
-            }
-     })
+        method: 'GET',
+        url: apiUrl + '/issues',
+        headers: {
+          'x-pagination': p + ';30'
+        }
+      })
     },
     getIssue: function(id){
       return $http.get(apiUrl + '/issues/' + id);
@@ -68,11 +85,11 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 
  $http(req).success(function(data){
-    $scope.issueTypes = data;
-    $scope.issue.issueTypeId= data[0].id;
-  }).error(function(err){
-    console.error('ERR', err);
-  });
+  $scope.issueTypes = data;
+  $scope.issue.issueTypeId= data[0].id;
+}).error(function(err){
+  console.error('ERR', err);
+});
 })
 
 .controller('NewIssueCtrl', function($http, $scope, apiUrl, geolocation, $ionicLoading){
@@ -81,77 +98,77 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     $scope.$on('$ionicView.beforeEnter', function() {
       // Re-initialize the user object every time the screen is displayed.
       // The first name and last name will be automatically filled from the form thanks to AngularJS's two-way binding.
-     
+
       $scope.position = {};
 
     });
 
 
-  $scope.createIssue=function(){
-    $http({
-      method: 'POST',
-      url: apiUrl + '/issues',
-      data: $scope.issue
-    }).success(function(){
-      data: $scope.issue
+    $scope.createIssue=function(){
+      $http({
+        method: 'POST',
+        url: apiUrl + '/issues',
+        data: $scope.issue
+      }).success(function(){
+        data: $scope.issue
 
-      var alertPopup = $ionicPopup.alert({
-        title: 'Incident créé'
+        var alertPopup = $ionicPopup.alert({
+          title: 'Incident créé'
+        });
+        alertPopup.then(function(res) {
+        });
+
+      }).error(function(err){
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Oups un problème est intervenu'
+        });
+        alertPopup.then(function(res) {
+        });
+
+        console.error('ERR', err);
       });
-      alertPopup.then(function(res) {
+    };
+
+
+
+    $scope.getPosition = function() {
+      console.log('position on load');
+      $ionicLoading.show({
+        template: '<ion-spinner  class="spinner-light" icon="ripple"></ion-spinner>',
+        delay: 750
       });
 
-    }).error(function(err){
+      geolocation.getLocation().then(function(data) {
+        console.log('click');
+        $ionicLoading.hide();
 
-      var alertPopup = $ionicPopup.alert({
-        title: 'Oups un problème est intervenu'
-      });
-      alertPopup.then(function(res) {
-      });
-
-      console.error('ERR', err);
-    });
-  };
-
-
-
-$scope.getPosition = function() {
-    console.log('position on load');
-    $ionicLoading.show({
-      template: '<ion-spinner  class="spinner-light" icon="ripple"></ion-spinner>',
-      delay: 750
-    });
-
-geolocation.getLocation().then(function(data) {
-  console.log('click');
-      $ionicLoading.hide();
-
-      var lat = data.coords.latitude;
-      var lng = data.coords.longitude;
-      var _position = {
+        var lat = data.coords.latitude;
+        var lng = data.coords.longitude;
+        var _position = {
           lat : lat,
           lng : lng
-      }
-      $scope.position = _position;
-      $scope.issue.lat = lat;
-      $scope.issue.lng = lng;
-      
-    },function(err){
+        }
+        $scope.position = _position;
+        $scope.issue.lat = lat;
+        $scope.issue.lng = lng;
+
+      },function(err){
        $ionicLoading.hide();
-      console.error('ERR', err);
-    });
-  };
+       console.error('ERR', err);
+     });
+    };
 
 
 
 
 
-$scope.getPhoto = function() {
-  CameraService.getPicture();
-  };
+    $scope.getPhoto = function() {
+      CameraService.getPicture();
+    };
 
 
-})
+  })
 
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
 
@@ -173,7 +190,7 @@ $scope.getPhoto = function() {
 
   getIssue();
 
- $scope.action={type:["comment"]};
+  $scope.action={type:["comment"]};
 
  // warning to update !
  $scope.addComment=function(issueId){
