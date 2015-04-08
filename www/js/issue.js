@@ -13,7 +13,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
  }, function(err) {
    console.error('ERR', err);
-    // err.status will contain the status code
+    // err.status will contain the status code.
   })
 
   $scope.doRefresh = function() {
