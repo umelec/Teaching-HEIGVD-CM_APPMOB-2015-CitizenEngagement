@@ -212,10 +212,18 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
      data: $scope.action
    }).success(function(){
      getIssue();
+    $scope.action.payload.text = " ";
+   
+
    }).error(function(err){
      console.error('ERR', err);
    });
  }
+
+
+ 
+
+
 })
 
 /*

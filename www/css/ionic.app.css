@@ -7580,6 +7580,13 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.header-bar {
+  border-bottom: solid 4px red; }
+
+.comment {
+  background-color: #f2f2f2;
+  padding: 5px; }
+
 .sbInfos {
   color: #3e3e3e;
   font-weight: 600;
@@ -7589,12 +7596,12 @@ a.button {
     margin-left: 0px; }
 
 .solved {
-  color: green; }
+  color: green;
+  font-weight: bold; }
 
 .rejected {
   text-decoration: line-through;
-  color: red;
-  font-weight: bold; }
+  color: red; }
 
 .pull-right {
   float: right;

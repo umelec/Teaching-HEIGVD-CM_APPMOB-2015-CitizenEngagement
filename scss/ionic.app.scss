@@ -28,8 +28,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.bar-header{
+  z-index: 100;
+  background-color: none;
+}
 
-.bar-header {
+.comment {
+  background-color: #f2f2f2;
+  padding: 5px;
 }
 
 
@@ -47,12 +53,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .solved {
   color: green;
+  font-weight: bold;
 }
 
 .rejected {
   text-decoration: line-through;
   color: red;
-  font-weight: bold;
 }
 
 .pull-right {

@@ -1,8 +1,18 @@
 <ion-view view-title="New Issue">
+
+
+  <ion-nav-buttons side="primary">
+    <a type="button" class="button icon-left ion-chevron-left button-clear button-dark" ng-controller="BackCtrl" ng-click="myGoBack()"></a>
+    </ion-nav-buttons>
+
   <ion-nav-buttons side="secondary">
-    <a type="button" class="button icon-left ion-chevron-left button-clear button-dark" ng-controller="BackCtrl" ng-click="myGoBack()">Retour</a>
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button-clear button-positive">Déconnection</button>
   </ion-nav-buttons>
+
+
+
+
+
 
   <ion-content>
     <form name="CreateIssue" ng-submit="createIssue()" ng-controller="IssueTypeListCrtl">
