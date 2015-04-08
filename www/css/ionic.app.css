@@ -2747,7 +2747,7 @@ ion-infinite-scroll {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: #dddddd;
   overflow: hidden; }
 
 .view-container {
@@ -5292,13 +5292,13 @@ a.item-content {
 .card, .list-inset {
   overflow: hidden;
   margin: 20px 10px;
-  border-radius: 2px;
+  border-radius: 0px;
   background-color: #fff; }
 
 .card {
   padding-top: 1px;
   padding-bottom: 1px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0); }
   .card .item {
     border-left: 0;
     border-right: 0; }
@@ -5312,17 +5312,17 @@ a.item-content {
   margin-right: 0; }
 
 .card .item:first-child, .list-inset .item:first-child, .padding > .list .item:first-child {
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px; }
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px; }
   .card .item:first-child .item-content, .list-inset .item:first-child .item-content, .padding > .list .item:first-child .item-content {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px; }
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px; }
 .card .item:last-child, .list-inset .item:last-child, .padding > .list .item:last-child {
-  border-bottom-right-radius: 2px;
-  border-bottom-left-radius: 2px; }
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px; }
   .card .item:last-child .item-content, .list-inset .item:last-child .item-content, .padding > .list .item:last-child .item-content {
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px; }
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px; }
 
 .card .item:last-child, .list-inset .item:last-child {
   margin-bottom: -1px; }
@@ -7580,9 +7580,26 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.bar-header {
+  z-index: 100;
+  background-color: none; }
+
+.comment {
+  background-color: #f2f2f2;
+  padding: 5px; }
+
 .sbInfos {
   color: #3e3e3e;
-  font-weight: 600; }
+  font-weight: 600;
+  margin-right: 5px;
+  margin-left: 10px; }
+  .sbInfos:first-child {
+    margin-left: 0px; }
 
 .solved {
-  color: green; }
+  color: green;
+  font-weight: bold; }
+
+.rejected {
+  text-decoration: line-through;
+  color: red; }

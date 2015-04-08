@@ -20,6 +20,24 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 
 
+//Main BG
+$base-background-color:           #dddddd !default;
+
+
+// Cards
+// -------------------------------
+
+$card-header-bg:                  #F5F5F5 !default;
+$card-body-bg:                    #fff !default;
+$card-footer-bg:                  #F5F5F5 !default;
+
+$card-padding:                    10px !default;
+$card-border-width:               1px !default;
+
+$card-border-color:               #ccc !default;
+$card-border-radius:              0px !default;
+$card-box-shadow:                 0 0px 0px rgba(0, 0, 0, 0) !default;
+
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css
@@ -28,14 +46,45 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+//Main CSS
+
+
+
+.bar-header{
+  z-index: 100;
+  background-color: none;
+}
+
+.comment {
+  background-color: #f2f2f2;
+  padding: 5px;
+}
+
 
 //sbInfos
 
 .sbInfos{
   color: #3e3e3e;
   font-weight: 600;
+  margin-right: 5px;
+  margin-left: 10px;
+  &:first-child {
+     margin-left: 0px;
+   }
 }
 
 .solved {
   color: green;
+  font-weight: bold;
 }
+
+.rejected {
+  text-decoration: line-through;
+  color: red;
+}
+
+
+
+
+
+

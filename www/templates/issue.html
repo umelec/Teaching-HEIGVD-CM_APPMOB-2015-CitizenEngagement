@@ -1,13 +1,15 @@
 <ion-view view-title="Issue">
-<ion-nav-bar animation="nav-title-slide-ios7"
-type="bar-positive"
-back-button-type="button-icon"
-back-button-icon="ion-arrow-left-c"></ion-nav-bar>
+<ion-nav-bar animation="nav-title-slide-ios7" type="bar-positive" back-button-type="button-icon" back-button-icon="ion-arrow-left-c"></ion-nav-bar>
 
-<ion-nav-buttons side="secondary">
-  <a class="button icon-left ion-chevron-left button-clear button-dark" ng-controller="BackCtrl" ng-click="myGoBack()">Retour</a>
-  <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Déconnection</button>
-</ion-nav-buttons>
+
+<ion-nav-buttons side="primary">
+    <a class="button icon-left ion-chevron-left button-clear button-dark" ng-controller="BackCtrl" ng-click="myGoBack()"></a>
+    </ion-nav-buttons>
+  <ion-nav-buttons side="secondary">
+    <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button-clear button-positive">Déconnection</button>
+  </ion-nav-buttons>
+
+
 
 <ion-content class="has-header">
 <div class="list card" ng-controller="IssueShowCrtl">
@@ -22,10 +24,10 @@ back-button-icon="ion-arrow-left-c"></ion-nav-bar>
   <form ng-submit="addComment(issue.id)">
     <div class="item" >
       <label class="item item-input">
-        <textarea type="Comments" placeholder="Commentaires" ng-model="action.payload.text"></textarea>
+        <textarea class="comment" type="Comments" placeholder="Commentaires (min 10 lettres)" ng-model="action.payload.text"></textarea>
       </label>
     </div>
-    <div class="item">
+    <div class="item" ng-if="action.payload.text.length > 10">
       <button type="submit" class="button button-block button-positive">
         Ajouter un comentaire
       </button>
