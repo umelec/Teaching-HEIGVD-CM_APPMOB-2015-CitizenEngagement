@@ -34,7 +34,7 @@
       $scope.mapMarkers.push({
         lat: issue.lat,
         lng: issue.lng,
-        message: "<p>{{ issue.description }}</p><img src=\"{{ issue.imageUrl }}\" width=\"200px\" />",
+        message: "<p>{{ issue.description }}</p><img src=\"{{ issue.imageUrl }}\"  ng-src=\"img/default.jpg\" width=\"100px\" />",
         getMessageScope: function() {
           var scope = $scope.$new();
           scope.issue = issue;

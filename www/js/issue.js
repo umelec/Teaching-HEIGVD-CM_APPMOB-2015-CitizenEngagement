@@ -39,6 +39,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
         $scope.searchText = '';
         $scope.dOrd = '';
         $scope.nOrd = '';
+        $scope.predicate = null;
     }
 
   $scope.nameOrd = function() {
@@ -47,7 +48,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     $scope.dOrd = '';
 
     if ($scope.reverse) {
-      $scope.nOrd = 'iion-ios-arrow-thin-down'
+      $scope.nOrd = 'ion-ios-arrow-thin-down'
     } else {
       $scope.nOrd = 'ion-ios-arrow-thin-up'
     }
@@ -65,7 +66,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
       $scope.dOrd = 'ion-ios-arrow-thin-up'
     }
   };
-
 
 })
 
