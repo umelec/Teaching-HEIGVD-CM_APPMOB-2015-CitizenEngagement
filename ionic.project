@@ -10,5 +10,5 @@
       "path": "/qimg-proxy",
       "proxyUrl": "https://warm-bastion-3094.herokuapp.com/api"
     }
-  ],
+  ]
 }
