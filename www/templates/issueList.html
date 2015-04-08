@@ -6,10 +6,12 @@
 
 <ion-content class="has-header" ng-controller="IssueListCrtl">
 
+ 
+
 <div class="bar bar-header item-input-inset">
   <label class="item-input-wrapper">
     <i class="icon ion-ios7-search placeholder-icon"></i>
-    <input type="search" placeholder="Search"  ng-model="filter">
+    <input type="search" placeholder="Search"  ng-model="searchText" ng-enter="search()">
   </label>
 </div>
 
@@ -27,10 +29,10 @@
 
 
 <ion-list>
-<ion-item class="item-avatar-left" ng-repeat="issue in issues | filter:search.value | orderBy:predicate:reverse" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
+<ion-item class="item-avatar-left" ng-repeat="issue in issues | filter:searchText | orderBy:predicate:reverse" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
 <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
 <h2>{{issue.description}}</h2>
-<p><i  ng-class="{'solved': issue.state == 'solved'}">Etat:</i> {{issue.state}} - <i class="sbInfos">Mis à jour le:</i> {{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}} - <i class="sbInfos">Créé par:</i> {{issue.owner.name}}</p>
+<p><i  ng-class="{'solved': issue.state == 'solved'}">Etat: {{issue.state}} </i> - <i class="sbInfos">Mis à jour le:</i> {{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}} - <i class="sbInfos">Créé par:</i> {{issue.owner.name}}</p>
 </ion-item>
 </ion-list>
 <ion-infinite-scroll

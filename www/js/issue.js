@@ -12,17 +12,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
    console.error('ERR', err);
     // err.status will contain the status code
   })
-
-
-  $scope.togOwner = function(ord) {
-    $scope.recentOrd = '';
-    $scope.stateOrd = '';
-    if ($scope.reverse) {
-      $scope.ownerOrd = 'ion-chevron-down'
-    } else {
-      $scope.ownerOrd = 'ion-chevron-up'
-    }
-  };
 })
 
 .controller('IssueCrtl', function(IssueService, $scope){
