@@ -4,7 +4,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 
 
-
+  $scope.items = [1,2,3];
   var p = 0;
   IssueService.getIssues(p).then(function(resp) {
    // console.log('Success', resp.data);
@@ -16,11 +16,60 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
     // err.status will contain the status code
   })
 
- 
+  $scope.doRefresh = function() {
+    var issueList = IssueService.getIssues($scope.page);
+    issueList.success(function(issues) {
+      $scope.$broadcast('scroll.refreshComplete');
+      if (issues.length == 0) {
+        $scope.noMoreItemsAvailable = true;
+        $scope.issues = false;
+      } else {
+        if (issues.length < 10) {
+          $scope.noMoreItemsAvailable = true;
+        }
+        $scope.issues = issues;
+        $scope.page++;
+      }
+    });
+  };
 
+ 
+//Réinitialiser les recherches
   $scope.clearSearch = function () {
-        $scope.searchText = " ";
+        $scope.searchText = '';
+        $scope.dOrd = '';
+        $scope.nOrd = '';
     }
+
+  $scope.nameOrd = function() {
+    console.log('hey');
+
+    $scope.dOrd = '';
+
+    if ($scope.reverse) {
+      $scope.nOrd = 'iion-ios-arrow-thin-down'
+    } else {
+      $scope.nOrd = 'ion-ios-arrow-thin-up'
+    }
+  };
+
+
+  $scope.dateOrd = function() {
+    console.log('3');
+
+    $scope.nOrd = '';
+
+    if ($scope.reverse) {
+      $scope.dOrd = 'ion-ios-arrow-thin-down'
+    } else {
+      $scope.dOrd = 'ion-ios-arrow-thin-up'
+    }
+  };
+
+
+
+
+
 
 
 
