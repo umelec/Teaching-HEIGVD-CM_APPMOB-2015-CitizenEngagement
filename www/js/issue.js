@@ -67,12 +67,6 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
   };
 
 
-
-
-
-
-
-
 })
 
 
