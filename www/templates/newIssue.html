@@ -20,7 +20,7 @@
           <div class="item">
             <label class="item item-input item-select">
               <div class"input-label">
-                Séléctionner un type d'accident
+                Type
               </div>
               <select ng-model="issue.issueTypeId">
                 <option ng-repeat="issueType in issueTypes" value="{{issueType.id}}">
@@ -33,9 +33,11 @@
           <textarea ng-model="issue.comments" placeholder="Description de l'incident"></textarea>
         </label>
         <div class="item" ng-controller="PhotoCtrl">
-          <button type="button" ng-click="getPhoto()" class="button button-block button-primary" > <i class="icon ion-loading-c"></i>Ajouter une photo !</button>
-          <img ng-src="{{lastPhoto}}" style="max-width: 50%">
-          {{lastPhoto}}
+          <button type="button" ng-click="getPhoto()" class="button button-block button-primary" >
+          <i class="icon ion-loading-c"></i>Ajouter une photo !</button>
+          <img actual-src="{{lasPhoto}}" style="max-width: 10%" ng-src="img/default.jpg"> 
+
+
         </div>
         <div class="item">
           <button type="button" ng-click="getPosition()" class="button button-block button-primary icon ion-pinpoint "> Me localiser</button>
@@ -45,7 +47,11 @@
               Localisé à, lat: {{position.lat}} long: {{position.lng}}
           </p>
         </div>
+          <div class="item">
+         <button type="submit" class="button button-block button-energized">Ajouter l'incident</button>
+           </div>
+
       </div>
-      <button type="submit" class="button button-block button-positive">Ajouter l'incident</button>
+     
     </form>
 </ion-view>

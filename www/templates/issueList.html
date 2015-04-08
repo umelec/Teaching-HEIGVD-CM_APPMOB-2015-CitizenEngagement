@@ -20,16 +20,21 @@
 </div>
 
 
+
+
 <div class="bar bar-header item-input-inset">
   Trier par:
   <button type="button" ng-click="predicate = 'owner.name'; reverse=!reverse;" class="button button-clear button-positive">Nom d'auteur</button>
-  |
-  <button type="button" ng-click="predicate = 'updatedOn'; reverse=!reverse;" class="button button-clear button-positive">date</button> |
+  <button type="button" ng-click="predicate = 'updatedOn'; reverse=!reverse;" class="button button-clear button-positive">Date</button>
+
+  </div>
   <!--<button type="button" ng-click="searchbydate()" class="button button-clear button-positive">Distance</button>-->
-
-
-
-   <select class="pull-right" ng-model="searchText" ng-enter="search()">
+<div class="list">
+ <label class="item item-input item-select">
+<div class="input-label">
+      Type
+    </div>
+   <select ng-model="searchText" ng-enter="search()">
                     <option value="created" selected>created</option>
                     <option value="assigned">assigned</option>
                     <option value="in_progress">in_progress</option>
@@ -37,10 +42,11 @@
                     <option value="solved">solved</option>
                 </select>   
 
-
-
-
+  </label>
 </div>
+
+
+
 
 
 <ion-list>
