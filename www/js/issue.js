@@ -2,6 +2,9 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 .controller('IssueListCrtl', function(IssueService, $scope){
 
+
+
+
   var p = 0;
   IssueService.getIssues(p).then(function(resp) {
    // console.log('Success', resp.data);
@@ -12,7 +15,21 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
    console.error('ERR', err);
     // err.status will contain the status code
   })
+
+ 
+
+  $scope.clearSearch = function () {
+        $scope.searchText = " ";
+    }
+
+
+
 })
+
+
+
+
+
 
 .controller('IssueCrtl', function(IssueService, $scope){
   Speaker.getIssue($stateParams.issueId).success(function(issue) {
@@ -160,10 +177,10 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
      console.error('ERR', err);
    });
 
-  $scope.getPhoto = function() {
-    CameraService.getPicture();
-  };
-})
+    $scope.getPhoto = function() {
+      CameraService.getPicture();
+    };
+  })
 
 .controller('IssueShowCrtl', function($http, $scope, apiUrl, $stateParams){
 

@@ -7585,12 +7585,16 @@ a.button {
   font-weight: 600;
   margin-right: 5px;
   margin-left: 10px; }
-
-.sbInfos:first-child {
-  margin-left: 0px; }
+  .sbInfos:first-child {
+    margin-left: 0px; }
 
 .solved {
   color: green; }
+
+.rejected {
+  text-decoration: line-through;
+  color: red;
+  font-weight: bold; }
 
 .pull-right {
   float: right;

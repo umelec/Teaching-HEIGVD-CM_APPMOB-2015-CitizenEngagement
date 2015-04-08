@@ -11,8 +11,13 @@
 <div class="bar bar-header item-input-inset">
   <label class="item-input-wrapper">
     <i class="icon ion-ios7-search placeholder-icon"></i>
-    <input type="search" placeholder="Rechercher: Etat, Mot, Nom, Prénom..."  ng-model="searchText" ng-enter="search()">
+    <input type="search" placeholder="search text"  ng-model="searchText" ng-enter="search()">
+    
+  
   </label>
+    <button ng-if="searchText.length" data-ng-click="clearSearch()" class="button button-clear">
+              X
+    </button>
 </div>
 
 
