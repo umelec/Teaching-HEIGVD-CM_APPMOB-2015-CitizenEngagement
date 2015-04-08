@@ -124,7 +124,8 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
 
 //Issuecraetion controller
 .controller('IssueTypeListCrtl', function($http, $scope, apiUrl, $ionicPopup){
-  $scope.issue={};
+  // supprimé sur les conseils de simon 
+  // $scope.issue={};
   var req = {
    method: 'GET',
    url: apiUrl + '/issueTypes'
