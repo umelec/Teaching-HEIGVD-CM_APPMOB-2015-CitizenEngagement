@@ -34,8 +34,25 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .sbInfos{
   color: #3e3e3e;
   font-weight: 600;
+  margin-right: 5px;
+  margin-left: 10px;
+  &:first-child {
+     margin-left: 0px;
+   }
 }
 
 .solved {
   color: green;
+}
+
+.rejected {
+  text-decoration: line-through;
+  color: red;
+  font-weight: bold;
+}
+
+.pull-right {
+  float: right;
+  display: inline;
+  margin-left: 15px;
 }

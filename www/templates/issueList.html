@@ -11,20 +11,31 @@
 <div class="bar bar-header item-input-inset">
   <label class="item-input-wrapper">
     <i class="icon ion-ios7-search placeholder-icon"></i>
-    <input type="search" placeholder="Search"  ng-model="searchText" ng-enter="search()">
+    <input type="search" placeholder="Rechercher: Etat, Mot, Nom, Prénom..."  ng-model="searchText" ng-enter="search()">
   </label>
 </div>
 
 
 <div class="bar bar-header item-input-inset">
-  ordoner par:
-  <button type="button" ng-click="predicate = 'owner.name'; reverse=!reverse;" class="button">Nom d'auteur</button>
+  Trier par:
+  <button type="button" ng-click="predicate = 'owner.name'; reverse=!reverse;" class="button button-clear button-positive">Nom d'auteur</button>
+  |
+  <button type="button" ng-click="predicate = 'updatedOn'; reverse=!reverse;" class="button button-clear button-positive">date</button> |
+  <!--<button type="button" ng-click="searchbydate()" class="button button-clear button-positive">Distance</button>-->
 
-  <button type="button" ng-click="predicate = 'updatedOn'; reverse=!reverse;" class="button">date</button>
 
 
-  <button type="button" ng-click="searchbydate()" class="button">Distance</button>
-  <button type="button" ng-click="" class="button">Type</button>
+   <select class="pull-right" ng-model="searchText" ng-enter="search()">
+                    <option value="created" selected>created</option>
+                    <option value="assigned">assigned</option>
+                    <option value="in_progress">in_progress</option>
+                    <option value="rejected">rejected</option>
+                    <option value="solved">solved</option>
+                </select>   
+
+
+
+
 </div>
 
 
@@ -32,7 +43,7 @@
 <ion-item class="item-avatar-left" ng-repeat="issue in issues | filter:searchText | orderBy:predicate:reverse" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
 <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
 <h2>{{issue.description}}</h2>
-<p><i  ng-class="{'solved': issue.state == 'solved'}">Etat: {{issue.state}} </i> - <i class="sbInfos">Mis à jour le:</i> {{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}} - <i class="sbInfos">Créé par:</i> {{issue.owner.name}}</p>
+<p><i class="sbInfos ion-information-circled"></i><i ng-class="{'solved': issue.state == 'solved','rejected': issue.state == 'rejected'}">{{issue.state}}</i><i class="sbInfos ion-ios-calendar"></i>{{issue.updatedOn|date:'dd/MM/yyyy à h:mm'}}<i class="sbInfos ion-ios-person"></i>{{issue.owner.name}}</p>
 </ion-item>
 </ion-list>
 <ion-infinite-scroll
