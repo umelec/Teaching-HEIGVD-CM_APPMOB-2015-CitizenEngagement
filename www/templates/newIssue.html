@@ -35,7 +35,7 @@
         <div class="item" ng-controller="PhotoCtrl">
           <button type="button" ng-click="getPhoto()" class="button button-block button-primary" >
           <i class="icon ion-loading-c"></i>Ajouter une photo !</button>
-          <img actual-src="{{lasPhoto}}" style="max-width: 10%" ng-src="img/default.jpg"> 
+          <img actual-src="{{lastPhoto}}" style="max-width: 10%" ng-src="img/default.jpg"> 
 
 
         </div>
@@ -48,7 +48,7 @@
           </p>
         </div>
           <div class="item">
-         <button type="submit" class="button button-block button-energized">Ajouter l'incident</button>
+         <button ng-if="issue.description" type="submit" class="button button-block button-energized">Ajouter l'incident</button>
            </div>
 
       </div>

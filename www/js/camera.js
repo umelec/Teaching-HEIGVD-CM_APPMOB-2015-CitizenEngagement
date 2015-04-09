@@ -39,7 +39,6 @@ $http({
   var imageUrl = data.url;
 // do something with imageUrl
   $scope.lastPhoto =  "https://warm-bastion-3094.herokuapp.com/api" + imageUrl;
-
 });
 });
 
