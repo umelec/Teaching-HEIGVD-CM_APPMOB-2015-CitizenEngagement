@@ -37,8 +37,8 @@ $http({
   }
 }).success(function(data) {
   var imageUrl = data.url;
-// do something with imageUrl
-  $scope.lastPhoto =  "https://warm-bastion-3094.herokuapp.com/api" + imageUrl;
+  // do something with imageUrl
+  $scope.lastPhoto = imageUrl;
 });
 });
 

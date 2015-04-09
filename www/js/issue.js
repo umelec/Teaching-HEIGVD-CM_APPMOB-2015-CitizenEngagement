@@ -156,7 +156,7 @@ angular.module('citizen-engagement.issue', ['citizen-engagement.constants', 'cit
         data: $scope.issue
       }).success(function(){
         data: $scope.issue
-
+        
         var alertPopup = $ionicPopup.alert({
           title: 'Incident créé'
         });

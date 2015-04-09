@@ -9,11 +9,6 @@
     <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button-clear button-positive">Déconnection</button>
   </ion-nav-buttons>
 
-
-
-
-
-
   <ion-content>
     <form name="CreateIssue" ng-submit="createIssue()" ng-controller="IssueTypeListCrtl">
       <div class="list card">
@@ -32,10 +27,11 @@
         <label class="item item-input">
           <textarea ng-model="issue.description" placeholder="Description de l'incident"></textarea>
         </label>
-        <div class="item" ng-controller="PhotoCtrl">
+        <div class="item imgAddIssue" ng-controller="PhotoCtrl">
+        <img actual-src="{{lastPhoto}}" style="max-width: 10%" ng-src="img/default.jpg"> 
           <button type="button" ng-click="getPhoto()" class="button button-block button-primary" >
           <i class="icon ion-loading-c"></i>Ajouter une photo !</button>
-          <img actual-src="{{lastPhoto}}" style="max-width: 10%" ng-src="img/default.jpg"> 
+          
 
 
         </div>
