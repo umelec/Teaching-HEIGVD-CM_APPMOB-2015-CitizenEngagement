@@ -10,28 +10,22 @@
     on-refresh="doRefresh()">
   </ion-refresher>
 
- 
-
 <div class="bar bar-header item-input-inset">
   <label class="item-input-wrapper">
     <i class="icon ion-ios7-search placeholder-icon"></i>
     <input type="search" placeholder="search text"  ng-model="searchText" ng-enter="search()">
-    
-  
+
   </label>
     <button ng-if="searchText.length" data-ng-click="clearSearch()" ng-model="clear" class="button button-clear">
               X
     </button>
 </div>
 
-
-
-
 <div class="bar bar-header item-input-inset">
 Trier par:
 <div class="button-bar">
   <button type="button" ng-click="predicate = 'owner.name'; reverse=!reverse; nameOrd()" class="button button-clear button-positive">Nom d'auteur <i class="icon {{nOrd}}"></i></button>
-  
+
   <button type="button" ng-click="predicate = 'updatedOn'; reverse=!reverse; dateOrd()" class="button button-clear button-positive">Date  <i class="icon {{dOrd}}"></i></button>
 </div></div>
   <!--<button type="button" ng-click="searchbydate()" class="button button-clear button-positive">Distance</button>-->
@@ -46,14 +40,12 @@ Trier par:
                     <option value="in_progress">in_progress</option>
                     <option value="rejected">rejected</option>
                     <option value="solved">solved</option>
-                </select>   
+                </select>
 
   </label>
 </div>
 
 <ion-list>
-
-
 
 <ion-item class="item-avatar-left" ng-repeat="issue in issues | filter:searchText | orderBy:predicate:reverse" ng-click="openModal()"  ui-sref="tab.issueShow({id:issue.id})">
 <img actual-src="{{issue.imageUrl}}" ng-src="img/default.jpg">
@@ -66,9 +58,6 @@ ng-if="moreDataCanBeLoaded()"
 icon="ion-loading-c"
 on-infinite="loadMoreData() distance="1%"">
 </ion-infinite-scroll>
-
-
-
 
 </ion-content>
 </ion-view>

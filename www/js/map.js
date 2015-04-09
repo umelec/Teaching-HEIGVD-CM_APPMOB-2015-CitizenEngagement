@@ -34,7 +34,8 @@
       $scope.mapMarkers.push({
         lat: issue.lat,
         lng: issue.lng,
-        message: "<p>{{ issue.description }}</p><img src=\"{{ issue.imageUrl }}\"  ng-src=\"img/default.jpg\" width=\"100px\" />",
+        message: ' <ion-item ng-click="openModal()"  ui-sref="tab.issueShow/\"{{id:issue.id}}\"> '+
+        '<p>\"{{ issue.description }}\"</p><img src=\"{{ issue.imageUrl }}\"  ng-src=\"img/default.jpg\" width=\"100px\" /> </ion>',
         getMessageScope: function() {
           var scope = $scope.$new();
           scope.issue = issue;
